@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------- */
+/*  Design tokens (Tailwind v4 @theme) — mapped from the XONE13 Figma file    */
+/* -------------------------------------------------------------------------- */
+@theme {
+  /* Type — Montserrat across the board, as in the source design */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand — signature teal → sage gradient (#007982 → #aebda1) */
+  --color-teal: #007982;
+  --color-teal-dark: #00474c;
+  --color-teal-soft: #e3f0f1;
+  --color-sage: #aebda1;
+
+  /* Ink / neutrals */
+  --color-ink: #464646;
+  --color-ink-strong: #282828;
+  --color-ink-muted: #7a7a7a;
+  --color-line: #ececec;
+
+  /* Easing + shadows pulled from the Figma layer effects */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-card: 0px 1px 4.7px 2px rgba(0, 0, 0, 0.12);
+  --shadow-panel: 0px 4px 4.3px 4px rgba(0, 0, 0, 0.1);
+  --shadow-button: 0px 4px 6.5px 2px rgba(0, 0, 0, 0.16);
+  --shadow-lift: 0 18px 40px -16px rgba(0, 71, 76, 0.28);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Base                                                                      */
+/* -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-teal);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Reusable brand utilities                                                  */
+/* -------------------------------------------------------------------------- */
+
+/* The teal→sage gradient as a surface (buttons, pills, accents). */
+@utility bg-brand {
+  background-image: linear-gradient(
+    to right,
+    var(--color-teal) 14%,
+    var(--color-sage) 100%
+  );
+}
+
+/* The same gradient clipped to text — used for headings and stats. */
+@utility text-brand {
+  background-image: linear-gradient(
+    to right,
+    var(--color-teal) 14%,
+    var(--color-sage) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* Continuous logo marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee var(--marquee-duration, 38s) linear infinite;
+}
+
+/* Subtle floating loop for decorative elements */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility animate-float {
+  animation: float-y var(--float-duration, 6s) ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float {
+    animation: none !important;
+  }
+}
