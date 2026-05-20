@@ -17,6 +17,15 @@ export function AboutHero() {
       maxWidth="max-w-5xl"
       distortion={1.2}
       speed={0.8}
+      // On-brand teal → sage flowing palette
+      colors={[
+        "#007982", // brand teal
+        "#4f9ca0", // mid teal
+        "#aebda1", // sage
+        "#cfe0d2", // pale sage
+        "#e3f0f1", // teal-soft
+        "#eef6f3", // near-white wash
+      ]}
       eyebrowClassName="!text-teal-dark/70"
       // Elegant display headline — tight tracking, controlled leading
       titleClassName="!font-semibold tracking-[-0.04em] !leading-[0.95] xl:text-[96px] text-ink-strong"
