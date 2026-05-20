@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { cn } from "../../lib/cn";
 import { ArrowUpRight } from "../icons";
 
-type Variant = "primary" | "outline" | "ghost";
+type Variant = "primary" | "outline" | "ghost" | "onDark";
 type Size = "md" | "lg";
 
 interface BaseProps {
@@ -35,6 +35,9 @@ const variantClasses: Record<Variant, string> = {
   outline:
     "border border-teal/30 bg-white text-teal hover:border-teal/60 hover:bg-teal-soft/40",
   ghost: "text-teal hover:bg-teal-soft/50",
+  // For placement on dark backgrounds (e.g. the final CTA panel).
+  onDark:
+    "border border-white/35 bg-transparent text-white hover:border-white/70 hover:bg-white/10",
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -59,7 +62,7 @@ export function Button({
           className={cn(
             "ml-1 grid place-items-center rounded-full transition-transform duration-300 ease-[var(--ease-premium)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
             size === "lg" ? "size-9" : "size-8",
-            variant === "primary"
+            variant === "primary" || variant === "onDark"
               ? "bg-white text-teal"
               : "bg-brand text-white",
           )}

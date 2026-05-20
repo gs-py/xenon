@@ -47,10 +47,9 @@ export function FinalCTA() {
               </Button>
               <Button
                 href={brand.socials.email}
-                variant="outline"
+                variant="onDark"
                 size="lg"
                 withArrow
-                className="border-white/30 bg-transparent text-white hover:border-white/60 hover:bg-white/10"
               >
                 E-Mail us
               </Button>

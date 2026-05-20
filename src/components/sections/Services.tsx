@@ -1,15 +1,14 @@
-import type { ComponentType, SVGProps } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, type ComponentType, type ReactNode, type SVGProps } from "react";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Button } from "../ui/Button";
 import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
 import { Camera, Code, Film, Megaphone, Palette } from "../icons";
+import { cn } from "../../lib/cn";
 import { services, type Service } from "../../data/services";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
-/** Maps each service to a representative icon (not in Figma, added for clarity). */
 const serviceIcons: Record<string, IconComponent> = {
   "social-media-marketing": Megaphone,
   "content-creation": Film,
@@ -17,6 +16,15 @@ const serviceIcons: Record<string, IconComponent> = {
   "website-development": Code,
   "photography-videography": Camera,
 };
+
+/** Bento placement per service (order matches the data module). */
+const layout: string[] = [
+  "sm:col-span-2 lg:col-span-2 lg:row-span-2", // Social Media Marketing — featured
+  "sm:col-span-2 lg:col-span-2", // Content Creation — wide
+  "sm:col-span-1 lg:col-span-1", // Design & Branding
+  "sm:col-span-1 lg:col-span-1", // Website Development
+  "sm:col-span-2 lg:col-span-4", // Photography & Videography — full width
+];
 
 export function Services() {
   return (
@@ -33,13 +41,16 @@ export function Services() {
           subtitle="We create impactful digital solutions that help brands grow, engage audiences, and drive results in today’s competitive market."
         />
 
-        <RevealGroup className="mt-14 flex flex-col gap-5" stagger={0.09}>
+        <RevealGroup
+          className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[minmax(190px,auto)]"
+          stagger={0.08}
+        >
           {services.map((service, i) => (
-            <RevealItem key={service.id}>
-              <ServiceRow
+            <RevealItem key={service.id} className={cn("h-full", layout[i])}>
+              <ServiceCard
                 service={service}
-                index={i}
                 Icon={serviceIcons[service.id]}
+                featured={i === 0}
               />
             </RevealItem>
           ))}
@@ -55,57 +66,78 @@ export function Services() {
   );
 }
 
-interface ServiceRowProps {
-  service: Service;
-  index: number;
-  Icon: IconComponent;
+interface BentoItemProps {
+  className?: string;
+  children: ReactNode;
 }
 
-function ServiceRow({ service, index, Icon }: ServiceRowProps) {
+/** Card with a brand-teal spotlight that tracks the cursor (CSS var driven). */
+function BentoItem({ className, children }: BentoItemProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+      el.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    };
+    el.addEventListener("mousemove", onMove);
+    return () => el.removeEventListener("mousemove", onMove);
+  }, []);
+
   return (
-    <motion.article
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative flex flex-col gap-7 overflow-hidden rounded-[28px] border border-line bg-white p-7 shadow-[var(--shadow-card)] transition-[box-shadow,border-color] duration-300 hover:border-teal/30 hover:shadow-[var(--shadow-lift)] sm:p-9 lg:flex-row lg:items-center lg:justify-between lg:gap-12"
+    <div
+      ref={ref}
+      className={cn(
+        "bento-spotlight group relative h-full overflow-hidden rounded-[28px] border border-line bg-white p-6 shadow-card transition duration-300 ease-[var(--ease-premium)] hover:-translate-y-1 hover:border-teal/40 hover:shadow-lift sm:p-7",
+        className,
+      )}
     >
-      {/* Soft border glow on hover */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[28px] opacity-0 ring-1 ring-teal/20 transition-opacity duration-300 group-hover:opacity-100"
-      />
+      <div className="relative z-10 flex h-full flex-col">{children}</div>
+    </div>
+  );
+}
 
-      <div className="flex items-center gap-5 lg:w-[40%]">
-        <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-teal-soft text-teal transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
-          <Icon className="size-7" />
-        </span>
-        <div>
-          <span className="text-xs font-medium tracking-[0.2em] text-ink-muted">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <h3 className="text-brand text-2xl font-semibold sm:text-[28px]">
-            {service.title}
-          </h3>
-        </div>
-      </div>
+interface ServiceCardProps {
+  service: Service;
+  Icon: IconComponent;
+  featured: boolean;
+}
 
-      <div className="lg:w-[55%]">
-        <ul className="grid gap-x-10 gap-y-2.5 sm:grid-cols-2">
-          {service.highlights.map((item) => (
-            <li
-              key={item}
-              className="flex items-center gap-3 text-[15px] font-light text-ink-strong sm:text-base"
-            >
-              <span className="size-1.5 shrink-0 rounded-full bg-brand" />
-              {item}
-            </li>
-          ))}
-        </ul>
-        {service.note && (
-          <p className="mt-3 text-xs font-light text-ink-muted">
-            {service.note}
-          </p>
+function ServiceCard({ service, Icon, featured }: ServiceCardProps) {
+  return (
+    <BentoItem>
+      <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-teal-soft text-teal transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
+        <Icon className="size-6" />
+      </span>
+
+      <h3
+        className={cn(
+          "text-brand mt-5 font-semibold",
+          featured ? "text-2xl sm:text-3xl" : "text-xl",
         )}
-      </div>
-    </motion.article>
+      >
+        {service.title}
+      </h3>
+      <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-ink/70">
+        {service.summary}
+      </p>
+
+      <ul className="mt-auto flex flex-wrap gap-2 pt-5">
+        {service.highlights.map((item) => (
+          <li
+            key={item}
+            className="rounded-full border border-teal/15 bg-teal-soft/50 px-3 py-1 text-xs font-medium text-teal-dark"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+      {service.note && (
+        <p className="mt-3 text-xs font-light text-ink-muted">{service.note}</p>
+      )}
+    </BentoItem>
   );
 }
