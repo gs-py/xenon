@@ -1,49 +1,31 @@
-import { motion } from "framer-motion";
-import aboutHero from "../../assets/about/hero.jpg";
-import { Container } from "../ui/Container";
-import { fadeUp, staggerContainer } from "../../lib/motion";
+import { HeroSection } from "../ui/hero-section-with-smooth-bg-shader";
 
 export function AboutHero() {
   return (
-    <section
-      aria-labelledby="about-hero-heading"
-      className="relative flex min-h-[78vh] items-end overflow-hidden pt-32 pb-16 lg:min-h-[88vh] lg:pb-24"
-    >
-      <img
-        src={aboutHero}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 -z-20 size-full object-cover"
-        fetchPriority="high"
-      />
-      {/* White at top for navbar contrast → teal scrim at the bottom for the headline. */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-white from-[16%] via-teal-dark/15 to-teal-dark/60"
-      />
-
-      <Container className="relative">
-        <motion.div
-          variants={staggerContainer(0.12, 0.05)}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl"
-        >
-          <motion.h1
-            id="about-hero-heading"
-            variants={fadeUp}
-            className="text-4xl font-bold leading-[1.05] text-balance text-white drop-shadow-[0_2px_24px_rgba(0,40,43,0.4)] sm:text-6xl lg:text-7xl"
-          >
-            Good companies can change the world
-          </motion.h1>
-          <motion.p
-            variants={fadeUp}
-            className="mt-4 text-2xl font-bold text-white/55 sm:text-4xl lg:text-5xl"
-          >
-            We help build them
-          </motion.p>
-        </motion.div>
-      </Container>
-    </section>
+    <HeroSection
+      eyebrow="About XONE13 Studios"
+      title="Good companies can change"
+      highlightText="the world"
+      description="We are a 360° marketing & production studio crafting brands that people remember — through creative storytelling, design, and unmistakable craft."
+      buttonText="Get in touch"
+      buttonArrow
+      onButtonClick={() => {
+        window.location.href = "#contact";
+      }}
+      fontFamily="Montserrat, sans-serif"
+      fontWeight={600}
+      maxWidth="max-w-5xl"
+      distortion={1.2}
+      speed={0.8}
+      eyebrowClassName="!text-teal-dark/70"
+      // Elegant display headline — tight tracking, controlled leading
+      titleClassName="!font-semibold tracking-[-0.04em] !leading-[0.95] xl:text-[96px] text-ink-strong"
+      // Serif italic accent for a refined, editorial contrast
+      highlightClassName="font-serif italic font-normal text-teal tracking-[-0.01em] xl:text-[1.05em]"
+      // Airy, light description
+      descriptionClassName="!text-ink/70 !text-lg sm:!text-xl !max-w-xl font-light !leading-relaxed tracking-[0.01em] mt-3"
+      // Elegant ghost pill — teal-dark sweeps up to fill on hover
+      buttonClassName="mt-2 !border !border-teal-dark/30 !bg-transparent !text-teal-dark !px-9 !py-4 !text-xs font-semibold tracking-[0.22em] uppercase backdrop-blur-sm transition-all duration-500 hover:!text-white hover:!border-teal-dark before:absolute before:inset-0 before:-z-0 before:translate-y-full before:bg-teal-dark before:transition-transform before:duration-500 before:ease-[cubic-bezier(0.16,1,0.3,1)] hover:before:translate-y-0"
+    />
   );
 }

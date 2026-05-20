@@ -34,7 +34,7 @@ export function Hero() {
       />
       <motion.div
         style={{ opacity: overlayOpacity }}
-        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-white/40 via-white/30 to-white"
+        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-white/40 via-white/30 to-white"
       />
 
       <Container className="relative">
