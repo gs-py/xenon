@@ -8,17 +8,15 @@ import {
   type ReactNode,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Close } from "../icons";
-import { Button } from "./Button";
+import { Check, Close } from "../icons";
 import { brand, whatsappWith } from "../../data/site";
-import { services } from "../../data/services";
 import { EASE_PREMIUM } from "../../lib/motion";
 
 /**
- * Shared "Get in touch" enquiry form. Mounted once at the app root; any CTA can
- * open it via `useInquiry().open()`. On submit it composes the answers into a
- * pre-filled WhatsApp message to the primary line (+971 52 158 9011) — so the
- * studio "receives the WhatsApp message once the client fills the form".
+ * Shared "Get in touch" enquiry form (design from Figma node 75:167 — a dark
+ * frosted-glass panel). Mounted once at the app root; any CTA opens it via
+ * `useInquiry().open()`. On submit it composes the answers into a pre-filled
+ * WhatsApp message to the primary line (+971 52 158 9011).
  */
 
 interface InquiryContextValue {
@@ -63,28 +61,23 @@ export function InquiryProvider({ children }: { children: ReactNode }) {
 }
 
 function InquiryDialog({ onClose }: { onClose: () => void }) {
-  const [submitting, setSubmitting] = useState(false);
-
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
+    const data = new FormData(e.currentTarget);
     const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
     const phone = String(data.get("phone") || "").trim();
-    const service = String(data.get("service") || "").trim();
     const message = String(data.get("message") || "").trim();
 
     const lines = [
       `Hi ${brand.name}, I'd like to get in touch.`,
       "",
       `Name: ${name}`,
-      phone && `Contact: ${phone}`,
-      service && `Interested in: ${service}`,
+      email && `Email: ${email}`,
+      phone && `Phone: +971 ${phone}`,
       message && `Message: ${message}`,
     ].filter(Boolean);
 
-    setSubmitting(true);
-    // Hand off to WhatsApp (primary line) with the enquiry pre-filled.
     window.open(whatsappWith(lines.join("\n")), "_blank", "noopener,noreferrer");
     onClose();
   }
@@ -99,11 +92,12 @@ function InquiryDialog({ onClose }: { onClose: () => void }) {
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-ink-strong/55 backdrop-blur-sm"
+        className="absolute inset-0 bg-ink-strong/25 backdrop-blur-[3px]"
         onClick={onClose}
         aria-hidden
       />
 
+      {/* Premium frosted-glass panel (Apple-style vibrancy) */}
       <motion.div
         role="dialog"
         aria-modal="true"
@@ -112,92 +106,107 @@ function InquiryDialog({ onClose }: { onClose: () => void }) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 16, scale: 0.98 }}
         transition={{ duration: 0.35, ease: EASE_PREMIUM }}
-        className="relative w-full max-w-lg overflow-hidden rounded-[28px] border border-line bg-white shadow-[var(--shadow-panel)]"
+        className="relative max-h-[90vh] w-full max-w-[480px] overflow-y-auto rounded-[32px] border border-white/15 bg-gradient-to-b from-white/[0.16] to-white/[0.04] px-6 py-7 text-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.65)] ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 sm:px-8 sm:py-8"
       >
-        {/* Branded header */}
-        <div className="relative overflow-hidden bg-brand px-7 py-7 text-white sm:px-9">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-10 -right-8 size-40 rounded-full bg-white/15 blur-2xl"
-          />
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close form"
-            className="absolute top-5 right-5 grid size-9 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/25"
-          >
-            <Close className="size-5" />
-          </button>
-          <h2 id="inquiry-title" className="text-2xl font-semibold">
-            Get in touch
-          </h2>
-          <p className="mt-1.5 max-w-sm text-sm font-light text-white/85">
-            Tell us a little about your brand — we'll continue the conversation
-            on WhatsApp and reply within one business day.
-          </p>
-        </div>
+        {/* Dark vibrancy base so text stays legible over any backdrop */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 rounded-[32px] bg-gradient-to-b from-[rgba(28,28,32,0.55)] to-[rgba(10,10,12,0.62)]"
+        />
+        {/* Top sheen highlight (kept behind content so it never washes out text) */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 rounded-t-[32px] bg-gradient-to-b from-white/10 to-transparent"
+        />
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-4 px-7 py-7 sm:px-9"
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close form"
+          className="absolute top-5 right-5 grid size-9 place-items-center rounded-full border border-white/20 bg-white/5 text-white/80 transition-colors hover:border-white/50 hover:text-white"
         >
-          <Field label="Your name" htmlFor="inq-name">
+          <Close className="size-5" />
+        </button>
+
+        <h2
+          id="inquiry-title"
+          className="relative z-10 max-w-[16ch] text-[22px] font-bold leading-tight text-white [text-shadow:0_1px_14px_rgba(0,0,0,0.45)] sm:text-[26px]"
+        >
+          Receive a call within seconds
+        </h2>
+
+        <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-3.5">
+          <Field label="Full Name*" htmlFor="inq-name">
             <input
               id="inq-name"
               name="name"
               type="text"
               required
               autoComplete="name"
-              placeholder="Jane Doe"
-              className={inputClass}
+              className={pillClass}
             />
           </Field>
 
-          <Field label="Phone or email" htmlFor="inq-phone">
+          <Field label="E-Mail*" htmlFor="inq-email">
             <input
-              id="inq-phone"
-              name="phone"
-              type="text"
+              id="inq-email"
+              name="email"
+              type="email"
               required
-              placeholder="+971 50 000 0000"
-              className={inputClass}
+              autoComplete="email"
+              className={pillClass}
             />
           </Field>
 
-          <Field label="What can we help with?" htmlFor="inq-service">
-            <select
-              id="inq-service"
-              name="service"
-              defaultValue=""
-              className={inputClass}
-            >
-              <option value="" disabled>
-                Select a service
-              </option>
-              {services.map((s) => (
-                <option key={s.id} value={s.title}>
-                  {s.title}
-                </option>
-              ))}
-              <option value="Something else">Something else</option>
-            </select>
+          <Field label="Phone*" htmlFor="inq-phone">
+            <div className="flex h-12 items-center rounded-full border border-white/20 bg-white/[0.06] px-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-colors focus-within:border-white/45 focus-within:bg-white/[0.1]">
+              <span className="font-semibold text-white">+971</span>
+              <span className="mx-4 h-5 w-px bg-white/30" />
+              <input
+                id="inq-phone"
+                name="phone"
+                type="tel"
+                required
+                placeholder="50 000 0000"
+                className="h-full flex-1 bg-transparent text-white outline-none placeholder:text-white/40"
+              />
+            </div>
           </Field>
 
-          <Field label="Message (optional)" htmlFor="inq-message">
+          <Field label="Message" htmlFor="inq-message">
             <textarea
               id="inq-message"
               name="message"
-              rows={3}
-              placeholder="A few words about your project…"
-              className={`${inputClass} resize-none`}
+              rows={2}
+              className={`${pillClass} h-auto resize-none rounded-[20px] py-3`}
             />
           </Field>
 
-          <Button type="submit" size="lg" withArrow className="mt-1 w-full">
-            {submitting ? "Opening WhatsApp…" : "Send on WhatsApp"}
-          </Button>
-          <p className="text-center text-xs font-light text-ink-muted">
-            Or message us directly at +971 52 158 9011
+          {/* Consent */}
+          <label className="flex cursor-pointer items-start gap-3">
+            <input type="checkbox" name="consent" className="peer sr-only" />
+            <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-[5px] border border-white/70 text-transparent transition-colors peer-checked:border-white peer-checked:bg-white peer-checked:text-ink-strong">
+              <Check className="size-3.5" />
+            </span>
+            <span className="text-sm font-light leading-relaxed text-white/85">
+              I agree to receive information about offers, deals and services
+              from this website (optional).
+            </span>
+          </label>
+
+          <button
+            type="submit"
+            className="mt-0.5 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand text-sm font-semibold tracking-[0.14em] text-white shadow-[var(--shadow-button)] transition-[filter] duration-300 hover:brightness-[1.07] sm:w-auto sm:self-start sm:px-12"
+          >
+            SUBMIT
+          </button>
+
+          <p className="text-xs font-light leading-relaxed text-white/60">
+            By clicking the submit button, I accept and provide my personal
+            information, and agree to the XONE13 STUDIOS{" "}
+            <span className="text-white/90 underline">Privacy Policy</span>,
+            applicable data protection laws, and{" "}
+            <span className="text-white/90 underline">Terms of Use</span>.
           </p>
         </form>
       </motion.div>
@@ -205,8 +214,8 @@ function InquiryDialog({ onClose }: { onClose: () => void }) {
   );
 }
 
-const inputClass =
-  "w-full rounded-2xl border border-line bg-[#f9f9f7] px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink-muted/70 focus:border-teal focus:bg-white";
+const pillClass =
+  "h-12 w-full rounded-full border border-white/20 bg-white/[0.06] px-5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] outline-none transition-colors placeholder:text-white/40 focus:border-white/45 focus:bg-white/[0.1]";
 
 function Field({
   label,
@@ -219,9 +228,7 @@ function Field({
 }) {
   return (
     <label htmlFor={htmlFor} className="flex flex-col gap-1.5">
-      <span className="text-xs font-medium tracking-wide text-ink/80">
-        {label}
-      </span>
+      <span className="text-sm font-medium text-white/90">{label}</span>
       {children}
     </label>
   );

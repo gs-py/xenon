@@ -1,20 +1,82 @@
-/** Client testimonials from the "What Our Clients Say" section. */
+/** Client testimonials for the "What Our Clients Say" section (from Figma). */
 
-import impressLogo from "../assets/testimonials/impress-build.jpg";
-import narratorLogo from "../assets/testimonials/design-narrator.jpg";
-import greenvistaLogo from "../assets/testimonials/green-vista.jpg";
+import propwebLogo from "../assets/clients/propweb.png";
+import varshaLogo from "../assets/clients/varsha-carpentry.png";
+import arabianLogo from "../assets/clients/arabian-frontrunner.png";
+import tanwoodLogo from "../assets/clients/tanwood.png";
+import aconceptLogo from "../assets/clients/a-concept.png";
+import consultLogo from "../assets/clients/consult-valiant.png";
+import impressLogo from "../assets/clients/impress.png";
+import narratorLogo from "../assets/clients/desiign-narrator.png";
+import greenvistaLogo from "../assets/clients/green-vista.png";
 
 export interface Testimonial {
   id: string;
   quote: string;
   name: string;
+  /** e.g. "Founder Propweb Reality" */
   role: string;
+  /** Industry, shown italic. e.g. "Real Estate" */
   company: string;
-  /** Client logo shown on the card. */
+  /** Client logo shown at the top of the card. */
   logo: string;
 }
 
 export const testimonials: Testimonial[] = [
+  {
+    id: "suhan",
+    quote:
+      "They handled our marketing and production well, delivering quality leads and great videos.",
+    name: "Suhan",
+    role: "Founder Propweb Reality",
+    company: "Real Estate",
+    logo: propwebLogo,
+  },
+  {
+    id: "aavar",
+    quote:
+      "They managed our social media and website, delivering quality leads through ads and strong production work.",
+    name: "Aavar",
+    role: "Co Founder Modern Varsha Carpentry",
+    company: "Interior Design Studio",
+    logo: varshaLogo,
+  },
+  {
+    id: "sumeet",
+    quote:
+      "At GITEX, XONE13 Studios delivered great photos and videos with a helpful team and timely execution.",
+    name: "Sumeet Gupta",
+    role: "Founder Arabian Frontrunner",
+    company: "Business & Economics Publication",
+    logo: arabianLogo,
+  },
+  {
+    id: "rinza",
+    quote:
+      "XONE13 Studios did our brochure, company profile, and branding really impressed with the result.",
+    name: "Rinza Sherin",
+    role: "Founder Tanwood Leather",
+    company: "Leather Accessories",
+    logo: tanwoodLogo,
+  },
+  {
+    id: "amal",
+    quote:
+      "XONE13 Studios handled our brochure, company profile, branding, and Kerala project shoot highly recommended.",
+    name: "Amal Benny",
+    role: "Founder A Concept",
+    company: "Architectural Studio",
+    logo: aconceptLogo,
+  },
+  {
+    id: "anant",
+    quote:
+      "Our event shoot was handled by Xone 13 Studios smoothly with timely delivery.",
+    name: "Dr. Anant Digraskar",
+    role: "CEO ConsultValiant",
+    company: "Business Management & Consulting Firm",
+    logo: consultLogo,
+  },
   {
     id: "vadim",
     quote:
