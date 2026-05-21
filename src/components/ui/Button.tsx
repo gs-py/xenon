@@ -17,6 +17,8 @@ interface BaseProps {
 
 interface AnchorProps extends BaseProps {
   href: string;
+  /** Open in a new tab (adds safe rel) — for external links like WhatsApp. */
+  newTab?: boolean;
   onClick?: never;
   type?: never;
 }
@@ -87,8 +89,15 @@ export function Button({
   };
 
   if ("href" in rest && rest.href !== undefined) {
+    const { newTab } = rest as AnchorProps;
     return (
-      <motion.a href={rest.href} className={classes} {...motionProps}>
+      <motion.a
+        href={rest.href}
+        className={classes}
+        target={newTab ? "_blank" : undefined}
+        rel={newTab ? "noopener noreferrer" : undefined}
+        {...motionProps}
+      >
         {content}
       </motion.a>
     );

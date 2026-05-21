@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Container } from "../ui/Container";
 import { Button } from "../ui/Button";
 import { Reveal } from "../ui/Reveal";
+import { links } from "../../data/site";
 import { inViewOnce } from "../../lib/motion";
 
 export function Showcase() {
@@ -13,12 +14,16 @@ export function Showcase() {
     >
       <Container>
         <Reveal>
-          <motion.div
+          <motion.a
+            href={links.showreel}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch our 2024 showreel on YouTube"
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={inViewOnce}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative aspect-[16/9] w-full overflow-hidden rounded-[36px] bg-ink-strong shadow-[var(--shadow-panel)] sm:aspect-[21/10] sm:rounded-[52px]"
+            className="group relative block aspect-[16/9] w-full overflow-hidden rounded-[36px] bg-ink-strong shadow-[var(--shadow-panel)] sm:aspect-[21/10] sm:rounded-[52px]"
           >
             {/* Branded gradient "media" surface */}
             <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_20%_0%,#0a5a60_0%,#003b40_45%,#001f22_100%)]" />
@@ -46,11 +51,11 @@ export function Showcase() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </motion.a>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-10 flex justify-center">
-          <Button href="#pricing" size="lg">
+          <Button href={links.packages} size="lg">
             SEE OUR PACKAGES
           </Button>
         </Reveal>

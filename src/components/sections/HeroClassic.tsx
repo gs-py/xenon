@@ -65,8 +65,8 @@ export function Hero() {
             className="mt-6 max-w-2xl text-base font-light leading-relaxed text-pretty text-ink/85 sm:text-lg"
           >
             At <span className="font-medium text-teal-dark">{brand.name}</span>,
-            we are a freelance 360° marketing and production agency helping
-            brands in interiors, retail, cafés, luxury, and lifestyle build a
+            we are a 360° marketing and production agency helping brands in
+            interiors, retail, cafés, luxury, and lifestyle build a
             strong online presence through creative storytelling, photography,
             videography, branding, and digital marketing.
           </motion.p>

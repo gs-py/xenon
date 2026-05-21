@@ -9,6 +9,7 @@ import { MotionConfig } from "framer-motion";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { FloatingActions } from "./components/layout/FloatingActions";
+import { InquiryProvider } from "./components/ui/InquiryModal";
 import HomePage from "./pages/HomePage";
 
 // Secondary pages are code-split so the landing page stays lean.
@@ -43,20 +44,22 @@ export default function App() {
   return (
     <BrowserRouter>
       <MotionConfig reducedMotion="user">
-        <ScrollManager />
-        <Navbar />
-        <main>
-          <Suspense fallback={<PageFallback />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/blogs" element={<BlogsPage />} />
-              <Route path="*" element={<HomePage />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-        <FloatingActions />
+        <InquiryProvider>
+          <ScrollManager />
+          <Navbar />
+          <main>
+            <Suspense fallback={<PageFallback />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/blogs" element={<BlogsPage />} />
+                <Route path="*" element={<HomePage />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+          <FloatingActions />
+        </InquiryProvider>
       </MotionConfig>
     </BrowserRouter>
   );

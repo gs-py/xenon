@@ -3,10 +3,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import heroBg from "../../assets/hero-bg.jpg";
 import { Container } from "../ui/Container";
 import { Button } from "../ui/Button";
-import { brand } from "../../data/site";
+import { useInquiry } from "../ui/InquiryModal";
+import { brand, links } from "../../data/site";
 import { EASE_PREMIUM, staggerContainer, fadeUp } from "../../lib/motion";
 
 export function Hero() {
+  const { open: openInquiry } = useInquiry();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -65,9 +67,9 @@ export function Hero() {
             className="mt-6 max-w-2xl text-base font-light leading-relaxed text-pretty text-ink/85 sm:text-lg"
           >
             At <span className="font-medium text-teal-dark">{brand.name}</span>,
-            we are a freelance 360° marketing and production agency helping
-            brands in interiors, retail, cafés, luxury, and lifestyle build a
-            strong online presence through creative storytelling, photography,
+            we are a 360° marketing and production agency helping brands in
+            interiors, retail, cafés, luxury, and lifestyle build a strong
+            online presence through creative storytelling, photography,
             videography, branding, and digital marketing.
           </motion.p>
 
@@ -75,10 +77,16 @@ export function Hero() {
             variants={fadeUp}
             className="mt-9 flex flex-col items-center gap-4 sm:flex-row"
           >
-            <Button href="#contact" size="lg">
+            <Button onClick={openInquiry} size="lg">
               GET IN TOUCH
             </Button>
-            <Button href="#work" variant="outline" size="lg" withArrow>
+            <Button
+              href={links.instagram}
+              variant="outline"
+              size="lg"
+              withArrow
+              newTab
+            >
               View our work
             </Button>
           </motion.div>

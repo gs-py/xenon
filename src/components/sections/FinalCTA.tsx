@@ -1,9 +1,11 @@
 import { Container } from "../ui/Container";
 import { Button } from "../ui/Button";
 import { Reveal } from "../ui/Reveal";
+import { useInquiry } from "../ui/InquiryModal";
 import { brand } from "../../data/site";
 
 export function FinalCTA() {
+  const { open: openInquiry } = useInquiry();
   return (
     <section
       id="contact"
@@ -42,8 +44,8 @@ export function FinalCTA() {
               delay={0.12}
               className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
-              <Button href="#inquiry" size="lg" withArrow>
-                Send an inquiry
+              <Button onClick={openInquiry} size="lg" withArrow>
+                Send an enquiry
               </Button>
               <Button
                 href={brand.socials.email}

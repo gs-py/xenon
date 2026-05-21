@@ -3,8 +3,9 @@ import { Container } from "../ui/Container";
 import { Brand } from "../ui/Brand";
 import { SmartLink } from "../ui/SmartLink";
 import { Instagram, Linkedin, Mail, Whatsapp } from "../icons";
-import { brand, footerLinks, navLinks } from "../../data/site";
+import { brand, contact, footerLinks, navLinks, telHref } from "../../data/site";
 import { services } from "../../data/services";
+import { useRegion } from "../../hooks/useRegion";
 
 interface Social {
   label: string;
@@ -20,6 +21,8 @@ const socials: Social[] = [
 ];
 
 export function Footer() {
+  const { isIndia } = useRegion();
+  const callPhone = isIndia ? contact.indiaPhone : contact.phone;
   return (
     <footer className="border-t border-line bg-white">
       <Container className="py-16 lg:py-20">
@@ -28,8 +31,8 @@ export function Footer() {
           <div className="flex flex-col gap-5">
             <Brand size={48} showName />
             <p className="max-w-xs text-sm font-light leading-relaxed text-ink/75">
-              A freelance 360° marketing and production studio building strong
-              online presence for ambitious brands in Dubai and beyond.
+              A 360° marketing and production studio building strong online
+              presence for ambitious brands in Dubai and beyond.
             </p>
             <ul className="flex items-center gap-3">
               {socials.map(({ label, href, Icon }) => (
@@ -37,7 +40,9 @@ export function Footer() {
                   <a
                     href={href}
                     aria-label={label}
-                    className="group grid size-11 place-items-center rounded-full border border-line text-ink transition-all duration-300 ease-[var(--ease-premium)] hover:-translate-y-0.5 hover:border-transparent hover:text-white hover:bg-brand"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group grid size-11 place-items-center rounded-full bg-brand text-white shadow-[var(--shadow-button)] transition-all duration-300 ease-[var(--ease-premium)] hover:-translate-y-0.5 hover:brightness-[1.06]"
                   >
                     <Icon className="size-5" />
                   </a>
@@ -67,10 +72,10 @@ export function Footer() {
               {brand.email}
             </a>
             <a
-              href={`tel:${brand.phone.replace(/\s/g, "")}`}
+              href={telHref(callPhone)}
               className="text-sm font-light text-ink/75 transition-colors hover:text-teal"
             >
-              {brand.phone}
+              {callPhone}
             </a>
             <a
               href={brand.whatsapp}

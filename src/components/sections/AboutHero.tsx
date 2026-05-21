@@ -1,6 +1,8 @@
 import { HeroSection } from "../ui/hero-section-with-smooth-bg-shader";
+import { useInquiry } from "../ui/InquiryModal";
 
 export function AboutHero() {
+  const { open: openInquiry } = useInquiry();
   return (
     <HeroSection
       eyebrow="About XONE13 Studios"
@@ -9,9 +11,7 @@ export function AboutHero() {
       description="We are a 360° marketing & production studio crafting brands that people remember — through creative storytelling, design, and unmistakable craft."
       buttonText="Get in touch"
       buttonArrow
-      onButtonClick={() => {
-        window.location.href = "#contact";
-      }}
+      onButtonClick={openInquiry}
       fontFamily="Montserrat, sans-serif"
       fontWeight={600}
       maxWidth="max-w-5xl"
@@ -26,15 +26,17 @@ export function AboutHero() {
         "#e3f0f1", // teal-soft
         "#eef6f3", // near-white wash
       ]}
-      eyebrowClassName="!text-teal-dark/70"
+      // Slightly stronger veil so the headline + copy stay legible over the shader
+      veilOpacity="bg-white/35"
+      eyebrowClassName="!text-teal-dark"
       // Elegant display headline — tight tracking, controlled leading
-      titleClassName="!font-semibold tracking-[-0.04em] !leading-[0.95] xl:text-[96px] text-ink-strong"
+      titleClassName="!font-semibold tracking-[-0.04em] !leading-[0.95] xl:text-[96px] text-ink-strong [text-shadow:0_1px_22px_rgba(255,255,255,0.55)]"
       // Serif italic accent for a refined, editorial contrast
-      highlightClassName="font-serif italic font-normal text-teal tracking-[-0.01em] xl:text-[1.05em]"
-      // Airy, light description
-      descriptionClassName="!text-ink/70 !text-lg sm:!text-xl !max-w-xl font-light !leading-relaxed tracking-[0.01em] mt-3"
-      // Elegant ghost pill — teal-dark sweeps up to fill on hover
-      buttonClassName="mt-2 !border !border-teal-dark/30 !bg-transparent !text-teal-dark !px-9 !py-4 !text-xs font-semibold tracking-[0.22em] uppercase backdrop-blur-sm transition-all duration-500 hover:!text-white hover:!border-teal-dark before:absolute before:inset-0 before:-z-0 before:translate-y-full before:bg-teal-dark before:transition-transform before:duration-500 before:ease-[cubic-bezier(0.16,1,0.3,1)] hover:before:translate-y-0"
+      highlightClassName="font-serif italic font-normal text-teal-dark tracking-[-0.01em] xl:text-[1.05em]"
+      // Description — darker ink for clear contrast against the light shader
+      descriptionClassName="!text-ink-strong/90 !text-lg sm:!text-xl !max-w-xl !font-normal !leading-relaxed tracking-[0.01em] mt-3 [text-shadow:0_1px_16px_rgba(255,255,255,0.5)]"
+      // Filled gradient pill — high-contrast, clearly tappable CTA
+      buttonClassName="mt-2 !border-0 !bg-brand !text-white !px-9 !py-4 !text-xs font-semibold tracking-[0.22em] uppercase shadow-[var(--shadow-button)] transition-all duration-300 hover:!brightness-[1.06]"
     />
   );
 }

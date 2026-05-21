@@ -6,6 +6,7 @@ import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
 import { ArrowUpRight, Camera, Code, Film, Megaphone, Palette } from "../icons";
 import { cn } from "../../lib/cn";
 import { services, type Service } from "../../data/services";
+import { whatsappPrimaryUrl } from "../../data/site";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -57,8 +58,8 @@ export function Services() {
         </RevealGroup>
 
         <Reveal delay={0.1} className="mt-12 flex justify-center">
-          <Button href="#work" size="lg" withArrow>
-            VIEW OUR WORK
+          <Button href={whatsappPrimaryUrl} size="lg" withArrow newTab>
+            CONNECT WITH US
           </Button>
         </Reveal>
       </Container>

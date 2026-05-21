@@ -1,18 +1,19 @@
 import { motion } from "framer-motion";
 import { Phone, Whatsapp } from "../icons";
-import { brand } from "../../data/site";
+import { brand, contact, telHref } from "../../data/site";
+import { useRegion } from "../../hooks/useRegion";
 import { EASE_PREMIUM } from "../../lib/motion";
 
-const actions = [
-  { label: "Chat on WhatsApp", href: brand.whatsapp, Icon: Whatsapp },
-  {
-    label: "Call us",
-    href: `tel:${brand.phone.replace(/\s/g, "")}`,
-    Icon: Phone,
-  },
-];
-
 export function FloatingActions() {
+  const { isIndia } = useRegion();
+  // India visitors reach Abel's number; everyone else gets the UAE line.
+  const callPhone = isIndia ? contact.indiaPhone : contact.phone;
+
+  const actions = [
+    { label: "Chat on WhatsApp", href: brand.whatsapp, Icon: Whatsapp },
+    { label: "Call us", href: telHref(callPhone), Icon: Phone },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}

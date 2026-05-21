@@ -2,7 +2,7 @@ import type { ComponentType, SVGProps } from "react";
 import { Container } from "../ui/Container";
 import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
 import { ArrowUpRight, Layers, Pulse, Sparkle, Target } from "../icons";
-import { brand } from "../../data/site";
+import { brand, links } from "../../data/site";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -74,7 +74,10 @@ export function WhyChooseUs() {
                   online and offline.
                 </p>
                 <a
-                  href="#contact"
+                  href={links.companyProfile}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group mt-7 inline-flex items-center gap-2 self-start text-base font-medium text-teal"
                 >
                   <span className="text-brand">View our company profile</span>

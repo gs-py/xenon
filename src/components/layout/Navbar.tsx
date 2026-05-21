@@ -6,7 +6,7 @@ import { Brand } from "../ui/Brand";
 import { Button } from "../ui/Button";
 import { SmartLink, isRoutePath } from "../ui/SmartLink";
 import { Close, Menu } from "../icons";
-import { navLinks } from "../../data/site";
+import { links, navLinks } from "../../data/site";
 import { useScrolled } from "../../hooks/useScrolled";
 import { cn } from "../../lib/cn";
 import { EASE_PREMIUM } from "../../lib/motion";
@@ -48,8 +48,8 @@ export function Navbar() {
         )}
       >
         <Container size="wide">
-          <nav className="flex h-18 items-center justify-between py-3">
-            <Brand size={42} />
+          <nav className="flex h-20 items-center justify-between py-3">
+            <Brand size={56} />
 
             <ul className="hidden items-center gap-9 lg:flex">
               {navLinks.map((link) => (
@@ -72,7 +72,7 @@ export function Navbar() {
 
             <div className="flex items-center gap-2">
               <div className="hidden sm:block">
-                <Button href="#contact" size="md" withArrow>
+                <Button href={links.googleCalendar} size="md" withArrow newTab>
                   Schedule a call
                 </Button>
               </div>
@@ -116,7 +116,12 @@ export function Navbar() {
                   </li>
                 ))}
                 <li className="px-1 pt-3">
-                  <Button href="#contact" withArrow className="w-full">
+                  <Button
+                    href={links.googleCalendar}
+                    withArrow
+                    newTab
+                    className="w-full"
+                  >
                     Schedule a call
                   </Button>
                 </li>
