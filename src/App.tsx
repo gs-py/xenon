@@ -15,6 +15,7 @@ import HomePage from "./pages/HomePage";
 // Secondary pages are code-split so the landing page stays lean.
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const BlogsPage = lazy(() => import("./pages/BlogsPage"));
+const PackagesPage = lazy(() => import("./pages/PackagesPage"));
 
 /** Scrolls to top on route change, or to the hashed section when present. */
 function ScrollManager() {
@@ -53,6 +54,7 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/blogs" element={<BlogsPage />} />
+                <Route path="/packages" element={<PackagesPage />} />
                 <Route path="*" element={<HomePage />} />
               </Routes>
             </Suspense>

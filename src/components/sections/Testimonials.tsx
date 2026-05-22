@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
+import { cn } from "../../lib/cn";
 import { testimonials, type Testimonial } from "../../data/testimonials";
 
 export function Testimonials() {
@@ -19,19 +20,20 @@ export function Testimonials() {
         />
       </Container>
 
-      {/* Auto-scrolling marquee — same continuous loop as "Our Clients". */}
-      <div className="group relative mt-14 overflow-hidden">
+      {/* Auto-scrolls on desktop; on mobile it's a swipeable horizontal scroll. */}
+      <div className="group relative mt-14 overflow-x-auto overflow-y-hidden overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] lg:overflow-hidden [&::-webkit-scrollbar]:hidden">
         {/* Edge fades */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent sm:w-28" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent sm:w-28" />
 
-        {/* Two copies → translateX(-50%) loops seamlessly; pauses on hover. */}
-        <ul className="animate-marquee flex w-max items-stretch px-4 py-8 [--marquee-duration:80s] hover:[animation-play-state:paused]">
+        {/* Two copies → translateX(-50%) loops seamlessly on desktop (pauses on
+            hover). The duplicate is hidden on mobile, where one set swipes. */}
+        <ul className="flex w-max items-stretch px-4 py-8 [--marquee-duration:80s] lg:animate-marquee lg:hover:[animation-play-state:paused]">
           {testimonials.map((t) => (
             <TestimonialCard key={t.id} testimonial={t} />
           ))}
           {testimonials.map((t) => (
-            <TestimonialCard key={`dup-${t.id}`} testimonial={t} aria-hidden />
+            <TestimonialCard key={`dup-${t.id}`} testimonial={t} dup />
           ))}
         </ul>
       </div>
@@ -41,13 +43,17 @@ export function Testimonials() {
 
 function TestimonialCard({
   testimonial: t,
-  ...rest
+  dup,
 }: {
   testimonial: Testimonial;
-  "aria-hidden"?: boolean;
+  /** Duplicate copy — powers the desktop loop; hidden on mobile. */
+  dup?: boolean;
 }) {
   return (
-    <li {...rest} className="mr-6 w-[340px] shrink-0 sm:w-[400px]">
+    <li
+      aria-hidden={dup || undefined}
+      className={cn("mr-6 w-[340px] shrink-0 sm:w-[400px]", dup && "max-lg:hidden")}
+    >
       <motion.figure
         whileHover={{ y: -6 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}

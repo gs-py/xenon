@@ -11,9 +11,12 @@ export interface NavLink {
  *  - Secondary +971 56 775 7580  → voice line + secondary WhatsApp
  */
 export const contact = {
-  email: "xone13studios.ae@gmail.com",
+  email: "info@xone13.com",
   whatsappPrimary: "971521589011",
   whatsappSecondary: "971567757580",
+  // Display-formatted versions of the WhatsApp lines (for showing in the UI).
+  whatsappPrimaryDisplay: "+971 52 158 9011",
+  whatsappSecondaryDisplay: "+971 56 775 7580",
   // Default (UAE) voice line.
   phone: "+971 56 775 7580",
   // TODO(client): Abel's India number — visitors detected in India see this
@@ -35,8 +38,8 @@ export const links = {
   linkedin: "https://linkedin.com/company/xone13studios",
   // TODO(client): YouTube showreel video — link to be shared by Navas.
   showreel: "https://youtube.com/@xone13studios",
-  // TODO(client): dedicated packages page (to be designed in Figma).
-  packages: "/#contact",
+  // Dedicated packages page.
+  packages: "/packages",
   // TODO(client): company-profile PDF. Drop the file at
   // `public/xone13-company-profile.pdf` and it downloads from this path.
   companyProfile: "/xone13-company-profile.pdf",
@@ -75,8 +78,8 @@ export const brand = {
 
 export const navLinks: NavLink[] = [
   { label: "Services", href: "/#services" },
+  { label: "Packages", href: "/packages" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Work", href: "/#work" },
   { label: "About", href: "/about" },
 ];
 

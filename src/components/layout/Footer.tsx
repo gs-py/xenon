@@ -3,9 +3,16 @@ import { Container } from "../ui/Container";
 import { Brand } from "../ui/Brand";
 import { SmartLink } from "../ui/SmartLink";
 import { Instagram, Linkedin, Mail, Whatsapp } from "../icons";
-import { brand, contact, footerLinks, navLinks, telHref } from "../../data/site";
+import {
+  brand,
+  contact,
+  emailUrl,
+  footerLinks,
+  navLinks,
+  whatsappPrimaryUrl,
+  whatsappSecondaryUrl,
+} from "../../data/site";
 import { services } from "../../data/services";
-import { useRegion } from "../../hooks/useRegion";
 
 interface Social {
   label: string;
@@ -21,8 +28,6 @@ const socials: Social[] = [
 ];
 
 export function Footer() {
-  const { isIndia } = useRegion();
-  const callPhone = isIndia ? contact.indiaPhone : contact.phone;
   return (
     <footer className="border-t border-line bg-white">
       <Container className="py-16 lg:py-20">
@@ -66,22 +71,29 @@ export function Footer() {
               Get in touch
             </h3>
             <a
-              href={brand.socials.email}
-              className="text-sm font-light text-ink/75 transition-colors hover:text-teal"
+              href={emailUrl}
+              className="flex items-center gap-2.5 text-sm font-light text-ink/75 transition-colors hover:text-teal"
             >
-              {brand.email}
+              <Mail className="size-4 shrink-0 text-teal" />
+              {contact.email}
             </a>
             <a
-              href={telHref(callPhone)}
-              className="text-sm font-light text-ink/75 transition-colors hover:text-teal"
+              href={whatsappPrimaryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 text-sm font-light text-ink/75 transition-colors hover:text-teal"
             >
-              {callPhone}
+              <Whatsapp className="size-4 shrink-0 text-teal" />
+              {contact.whatsappPrimaryDisplay}
             </a>
             <a
-              href={brand.whatsapp}
-              className="text-sm font-light text-ink/75 transition-colors hover:text-teal"
+              href={whatsappSecondaryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 text-sm font-light text-ink/75 transition-colors hover:text-teal"
             >
-              Chat on WhatsApp
+              <Whatsapp className="size-4 shrink-0 text-teal" />
+              {contact.whatsappSecondaryDisplay}
             </a>
           </div>
         </div>

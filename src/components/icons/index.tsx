@@ -134,6 +134,14 @@ export function Camera(props: IconProps) {
   );
 }
 
+export function BarChart(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 20v-5M12 20V9M19 20v-8" />
+    </svg>
+  );
+}
+
 /* ---- Why-choose-us / process --------------------------------------------- */
 
 export function Target(props: IconProps) {
