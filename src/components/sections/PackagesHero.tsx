@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Container } from "../ui/Container";
 import { VerticalCutReveal } from "../ui/VerticalCutReveal";
-import { fadeUp, staggerContainer } from "../../lib/motion";
+import { staggerContainer } from "../../lib/motion";
 
 /**
  * Heading for the /packages page — transparent background (shader shows

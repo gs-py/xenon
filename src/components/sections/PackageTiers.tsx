@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Briefcase,
   Camera,
@@ -11,7 +11,7 @@ import {
 import { Container } from "../ui/Container";
 import { RippleButton } from "../ui/RippleButton";
 import { cn } from "../../lib/cn";
-import { EASE_PREMIUM } from "../../lib/motion";
+
 import { whatsappWith } from "../../data/site";
 import {
   packages,
@@ -81,11 +81,9 @@ function CategoryTabs({
 function GlassyTierCard({
   tier,
   category,
-  index,
 }: {
   tier: PackageTier;
   category: string;
-  index: number;
 }) {
   const requestUrl = whatsappWith(
     `Hi XONE13 Studios, I'd like to enquire about the ${category} — ${tier.name} package. Please share the details.`,
@@ -178,12 +176,11 @@ export function PackageTiers() {
 
         {/* Glassy cards */}
         <div className="mt-14 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-6">
-          {category.tiers.map((tier, i) => (
+          {category.tiers.map((tier) => (
             <GlassyTierCard
               key={tier.name}
               tier={tier}
               category={category.label}
-              index={i}
             />
           ))}
         </div>
