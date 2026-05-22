@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { contact, telHref } from "../data/site";
 
 /**
  * Lightweight, network-free visitor-region detection.
@@ -34,4 +35,29 @@ export function useRegion(): Region {
   }, []);
 
   return { isIndia };
+}
+
+export interface RegionPhone {
+  /** E.164-ish display string, e.g. "+971 56 775 7580" */
+  display: string;
+  /** Raw phone string for telHref, e.g. "+971567757580" */
+  phone: string;
+  /** Ready-to-use `tel:` href */
+  href: string;
+}
+
+/**
+ * Returns the correct call number for the visitor's detected region.
+ *
+ * - India timezone / locale  →  `contact.indiaPhone`
+ * - Everyone else            →  `contact.phone` (UAE line)
+ *
+ * Safe to render immediately — falls back to UAE line on first render
+ * before the effect has run.
+ */
+export function useRegionPhone(): RegionPhone {
+  const { isIndia } = useRegion();
+  const phone = isIndia ? contact.indiaPhone : contact.phone;
+  const display = isIndia ? contact.indiaPhoneDisplay : contact.phoneDisplay;
+  return { phone, display, href: telHref(phone) };
 }

@@ -1,14 +1,163 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  Briefcase,
+  Camera,
+  Monitor,
+  Megaphone,
+  Image,
+  Check,
+} from "lucide-react";
 import { Container } from "../ui/Container";
-import { Button } from "../ui/Button";
-import { Reveal } from "../ui/Reveal";
-import { ArrowUpRight, BarChart } from "../icons";
+import { RippleButton } from "../ui/RippleButton";
 import { cn } from "../../lib/cn";
 import { EASE_PREMIUM } from "../../lib/motion";
 import { whatsappWith } from "../../data/site";
-import { packages, type PackageTier } from "../../data/packages";
+import {
+  packages,
+  type PackageCategory,
+  type PackageTier,
+} from "../../data/packages";
 
+/* ── Category icon map ────────────────────────────────────────────────────── */
+const categoryIcons: Record<string, React.ReactNode> = {
+  "social-media": <Megaphone size={15} />,
+  branding: <Briefcase size={15} />,
+  website: <Monitor size={15} />,
+  ads: <Image size={15} />,
+  "photography-videography": <Camera size={15} />,
+};
+
+/* ── Tab switcher ─────────────────────────────────────────────────────────── */
+function CategoryTabs({
+  categories,
+  activeId,
+  onSelect,
+}: {
+  categories: PackageCategory[];
+  activeId: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div className="flex justify-center">
+      <div className="relative mx-auto flex w-fit flex-wrap justify-center gap-1 rounded-full border border-black/10 bg-white/30 p-1.5 backdrop-blur-md shadow-sm">
+        {categories.map((cat) => {
+          const isActive = cat.id === activeId;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => onSelect(cat.id)}
+              className={cn(
+                "relative flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-semibold tracking-wide transition-colors duration-300",
+                isActive
+                  ? "text-white"
+                  : "text-ink/50 hover:text-ink/80",
+              )}
+            >
+              {isActive && (
+                <motion.span
+                  layoutId="pkg-tab-bg"
+                  aria-hidden
+                  className="absolute inset-0 rounded-full bg-teal shadow-[0_4px_14px_rgba(0,121,130,0.35)]"
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                />
+              )}
+              <span className="relative flex items-center gap-1.5">
+                {categoryIcons[cat.id]}
+                {cat.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ── Glassy pricing card ──────────────────────────────────────────────────── */
+function GlassyTierCard({
+  tier,
+  category,
+  index,
+}: {
+  tier: PackageTier;
+  category: string;
+  index: number;
+}) {
+  const requestUrl = whatsappWith(
+    `Hi XONE13 Studios, I'd like to enquire about the ${category} — ${tier.name} package. Please share the details.`,
+  );
+
+  return (
+    <div
+      className={cn(
+        "flex-1 max-w-xs",
+        tier.featured && "scale-105 relative z-10",
+      )}
+    >
+      <div
+        className={cn(
+          "flex h-full flex-col rounded-2xl px-7 py-8 shadow-xl transition-all duration-300",
+          "backdrop-blur-md bg-white/30 border border-black/10",
+          tier.featured &&
+          "ring-2 ring-teal/30 shadow-2xl",
+        )}
+      >
+        {/* Popular badge */}
+        {tier.featured && (
+          <div className="absolute -top-4 right-4 rounded-full bg-teal px-3 py-1 text-[12px] font-semibold text-white">
+            Most Popular
+          </div>
+        )}
+
+        {/* Plan name — large, extralight */}
+        <div className="mb-3">
+          <h3 className="text-[42px] font-extralight tracking-[-0.03em] text-ink-strong leading-tight">
+            {tier.name}
+          </h3>
+          <p className="mt-1 text-[15px] font-light text-ink/60">
+            {tier.tagline}
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="my-5 h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+
+        {/* Feature list */}
+        <ul className="mb-6 flex flex-col gap-2.5 text-[14px] text-ink/80">
+          {tier.features.map((feature) => (
+            <li key={feature} className="flex items-center gap-2.5">
+              <Check size={14} className="shrink-0 text-teal" strokeWidth={3} />
+              <span className="font-light">{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA — pushed to bottom */}
+        <div className="mt-auto">
+          <RippleButton
+            href={requestUrl}
+            newTab
+            rippleColor="rgba(0,121,130,0.2)"
+            className={cn(
+              "block w-full rounded-xl py-3 text-center text-[14px] font-semibold transition-all duration-200",
+              tier.featured
+                ? "bg-teal text-white hover:brightness-110"
+                : "border border-black/15 bg-black/[0.06] text-ink-strong hover:bg-black/[0.1]",
+            )}
+          >
+            Request Package
+          </RippleButton>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main section ─────────────────────────────────────────────────────────── */
 export function PackageTiers() {
   const [activeId, setActiveId] = useState(packages[0].id);
   const category = packages.find((c) => c.id === activeId) ?? packages[0];
@@ -17,130 +166,28 @@ export function PackageTiers() {
     <section
       id="packages"
       aria-label="Service packages"
-      className="scroll-mt-24 pb-24 lg:pb-28"
+      className="relative scroll-mt-24 pb-20 lg:pb-28"
     >
-      <Container>
-        {/* Category selector */}
-        <Reveal className="flex justify-center">
-          <div
-            role="tablist"
-            aria-label="Package categories"
-            className="flex max-w-full gap-1 overflow-x-auto rounded-full border border-line bg-white p-1.5 shadow-card [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {packages.map((cat) => {
-              const isActive = cat.id === activeId;
-              return (
-                <button
-                  key={cat.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActiveId(cat.id)}
-                  className={cn(
-                    "relative whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide uppercase transition-colors duration-300",
-                    isActive
-                      ? "text-teal-dark"
-                      : "text-teal/70 hover:text-teal",
-                  )}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="pkg-tab"
-                      aria-hidden
-                      className="absolute inset-0 -z-10 rounded-full bg-teal-soft"
-                      transition={{ duration: 0.4, ease: EASE_PREMIUM }}
-                    />
-                  )}
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
-        </Reveal>
+      <Container className="relative z-10">
+        {/* Category tab switcher */}
+        <CategoryTabs
+          categories={packages}
+          activeId={activeId}
+          onSelect={setActiveId}
+        />
 
-        {/* Tier cards — re-keyed per category so they re-reveal on switch */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={category.id}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.4, ease: EASE_PREMIUM }}
-            className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:items-stretch"
-          >
-            {category.tiers.map((tier) => (
-              <TierCard
-                key={tier.name}
-                tier={tier}
-                category={category.label}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+        {/* Glassy cards */}
+        <div className="mt-14 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-6">
+          {category.tiers.map((tier, i) => (
+            <GlassyTierCard
+              key={tier.name}
+              tier={tier}
+              category={category.label}
+              index={i}
+            />
+          ))}
+        </div>
       </Container>
     </section>
-  );
-}
-
-function TierCard({
-  tier,
-  category,
-}: {
-  tier: PackageTier;
-  category: string;
-}) {
-  const requestUrl = whatsappWith(
-    `Hi XONE13 Studios, I'd like to request the ${category} — ${tier.name} package. Please share the details.`,
-  );
-
-  return (
-    <div
-      className={cn(
-        "group relative flex h-full flex-col rounded-[28px] border p-7 transition duration-300 ease-[var(--ease-premium)] hover:-translate-y-1 hover:shadow-lift sm:p-8",
-        tier.featured
-          ? "border-teal/25 bg-gradient-to-b from-teal-soft/70 to-white shadow-lift ring-1 ring-teal/10 lg:-mt-3 lg:mb-3"
-          : "border-line bg-gradient-to-b from-teal-soft/35 to-white shadow-card hover:border-teal/40",
-      )}
-    >
-      {tier.featured && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand px-4 py-1 text-[11px] font-semibold tracking-[0.16em] text-white uppercase shadow-button">
-          Most Popular
-        </span>
-      )}
-
-      <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-teal-soft text-teal transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
-        <BarChart className="size-6" />
-      </span>
-
-      <h3 className="text-brand mt-5 text-2xl font-semibold sm:text-[28px]">
-        {tier.name}
-      </h3>
-      <p className="mt-2 text-sm font-light leading-relaxed text-ink/70">
-        {tier.tagline}
-      </p>
-
-      <ul className="mt-6 flex flex-col gap-3">
-        {tier.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-3">
-            <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md bg-teal-soft text-teal">
-              <ArrowUpRight className="size-3.5" />
-            </span>
-            <span className="text-sm font-light leading-snug text-ink/85">
-              {feature}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <Button
-        href={requestUrl}
-        newTab
-        withArrow
-        size="lg"
-        className="mt-8 w-full"
-      >
-        Request Package
-      </Button>
-    </div>
   );
 }

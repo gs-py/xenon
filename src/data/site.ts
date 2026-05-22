@@ -11,7 +11,7 @@ export interface NavLink {
  *  - Secondary +971 56 775 7580  → voice line + secondary WhatsApp
  */
 export const contact = {
-  email: "info@xone13.com",
+  email: "xone13studios.ae@gmail.com",
   whatsappPrimary: "971521589011",
   whatsappSecondary: "971567757580",
   // Display-formatted versions of the WhatsApp lines (for showing in the UI).
@@ -19,9 +19,11 @@ export const contact = {
   whatsappSecondaryDisplay: "+971 56 775 7580",
   // Default (UAE) voice line.
   phone: "+971 56 775 7580",
-  // TODO(client): Abel's India number — visitors detected in India see this
+  phoneDisplay: "+971 56 775 7580",
+  // Abel's India number — visitors detected in India see this
   // as the "Call" number instead of the UAE line.
-  indiaPhone: "+91 00000 00000",
+  indiaPhone: "+91 75102 68128",
+  indiaPhoneDisplay: "+91 75102 68128",
 } as const;
 
 /**

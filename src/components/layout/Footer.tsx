@@ -2,7 +2,8 @@ import type { ComponentType, SVGProps } from "react";
 import { Container } from "../ui/Container";
 import { Brand } from "../ui/Brand";
 import { SmartLink } from "../ui/SmartLink";
-import { Instagram, Linkedin, Mail, Whatsapp } from "../icons";
+import { Instagram, Linkedin, Mail, Phone, Whatsapp } from "../icons";
+import { useRegionPhone } from "../../hooks/useRegion";
 import {
   brand,
   contact,
@@ -28,6 +29,7 @@ const socials: Social[] = [
 ];
 
 export function Footer() {
+  const { display: phoneDisplay, href: phoneHref } = useRegionPhone();
   return (
     <footer className="border-t border-line bg-white">
       <Container className="py-16 lg:py-20">
@@ -76,6 +78,13 @@ export function Footer() {
             >
               <Mail className="size-4 shrink-0 text-teal" />
               {contact.email}
+            </a>
+            <a
+              href={phoneHref}
+              className="flex items-center gap-2.5 text-sm font-light text-ink/75 transition-colors hover:text-teal"
+            >
+              <Phone className="size-4 shrink-0 text-teal" />
+              {phoneDisplay}
             </a>
             <a
               href={whatsappPrimaryUrl}
