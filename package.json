@@ -12,8 +12,7 @@
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.76",
     "@tailwindcss/vite": "^4.3.0",
-    "@tsparticles/react": "^4.0.5",
-    "@tsparticles/slim": "^4.0.5",
+
     "framer-motion": "^12.39.0",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
