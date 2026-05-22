@@ -14,7 +14,7 @@ const routes = [
 ];
 
 function generateSitemap() {
-  const currentDate = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes
@@ -25,14 +25,12 @@ function generateSitemap() {
     <lastmod>${currentDate}</lastmod>
   </url>`;
     })
-    .join("")}
+    .join('\n')}
 
 </urlset>`;
-
   if (!fs.existsSync(OUT_DIR)) {
     fs.mkdirSync(OUT_DIR, { recursive: true });
   }
-
   fs.writeFileSync(path.join(OUT_DIR, "sitemap.xml"), sitemap, "utf8");
   console.log("✅ Sitemap generated successfully!");
 }
