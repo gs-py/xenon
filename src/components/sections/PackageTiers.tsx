@@ -13,6 +13,7 @@ import { RippleButton } from "../ui/RippleButton";
 import { cn } from "../../lib/cn";
 
 import { whatsappWith } from "../../data/site";
+import { useRegion } from "../../hooks/useRegion";
 import {
   packages,
   type PackageCategory,
@@ -157,8 +158,15 @@ function GlassyTierCard({
 
 /* ── Main section ─────────────────────────────────────────────────────────── */
 export function PackageTiers() {
+  const { isIndia } = useRegion();
+  // India visitors don't see the Photography & Videography offering.
+  const visiblePackages = isIndia
+    ? packages.filter((c) => c.id !== "photography-videography")
+    : packages;
+
   const [activeId, setActiveId] = useState(packages[0].id);
-  const category = packages.find((c) => c.id === activeId) ?? packages[0];
+  const category =
+    visiblePackages.find((c) => c.id === activeId) ?? visiblePackages[0];
 
   return (
     <section
@@ -169,7 +177,7 @@ export function PackageTiers() {
       <Container className="relative z-10">
         {/* Category tab switcher */}
         <CategoryTabs
-          categories={packages}
+          categories={visiblePackages}
           activeId={activeId}
           onSelect={setActiveId}
         />

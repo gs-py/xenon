@@ -5,6 +5,7 @@ import { Button } from "../ui/Button";
 import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
 import { ArrowUpRight, Camera, Code, Film, Megaphone, Palette } from "../icons";
 import { cn } from "../../lib/cn";
+import { useRegion } from "../../hooks/useRegion";
 import { services, type Service } from "../../data/services";
 import { whatsappPrimaryUrl } from "../../data/site";
 
@@ -28,6 +29,12 @@ const layout: string[] = [
 ];
 
 export function Services() {
+  const { isIndia } = useRegion();
+  // India visitors don't see the Photography & Videography offering.
+  const visibleServices = isIndia
+    ? services.filter((s) => s.id !== "photography-videography")
+    : services;
+
   return (
     <section
       id="services"
@@ -46,7 +53,7 @@ export function Services() {
           className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[minmax(190px,auto)]"
           stagger={0.08}
         >
-          {services.map((service, i) => (
+          {visibleServices.map((service, i) => (
             <RevealItem key={service.id} className={cn("h-full", layout[i])}>
               <ServiceCard
                 service={service}
