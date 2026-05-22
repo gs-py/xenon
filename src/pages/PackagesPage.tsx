@@ -28,7 +28,7 @@ export default function PackagesPage() {
       <div className="relative z-10">
         <PackagesHero />
         <PackageTiers />
-        <FinalCTA />
+        <FinalCTA variant="light" />
       </div>
     </div>
   );

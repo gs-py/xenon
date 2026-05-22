@@ -1,7 +1,6 @@
 import storyImg from "../../assets/about/story.jpg";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
-import { brand } from "../../data/site";
 
 /** Brand wordmark with the signature gradient, reused across the prose. */
 function Mark({ className = "" }: { className?: string }) {
@@ -40,7 +39,7 @@ export function AboutStory() {
 
             <Reveal as="p" delay={0.14} className="font-light leading-relaxed text-pretty text-ink/80">
               We believe strong brands are built through clarity, consistency,
-              and creative execution. At {brand.name}, we work as a reliable
+              and creative execution. At xone13, we work as a reliable
               creative and marketing partner, ensuring photography, videography,
               branding, and digital presence are managed with precision,
               stability, and purpose.
