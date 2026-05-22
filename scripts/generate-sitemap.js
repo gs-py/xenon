@@ -17,19 +17,17 @@ function generateSitemap() {
   const currentDate = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes
-  .map((route) => {
-    return `
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes
+    .map((route) => {
+      return `
   <url>
     <loc>${BASE_URL}${route.url}</loc>
     <lastmod>${currentDate}</lastmod>
   </url>`;
-  })
-  .join("")}
+    })
+    .join("")}
 
-</urlset>
-`;
+</urlset>`;
 
   if (!fs.existsSync(OUT_DIR)) {
     fs.mkdirSync(OUT_DIR, { recursive: true });
