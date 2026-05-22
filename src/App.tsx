@@ -11,6 +11,8 @@ import { Footer } from "./components/layout/Footer";
 import { FloatingActions } from "./components/layout/FloatingActions";
 import { InquiryProvider } from "./components/ui/InquiryModal";
 import HomePage from "./pages/HomePage";
+import { HelmetProvider } from "react-helmet-async";
+import { Analytics } from "./components/seo/Analytics";
 
 // Secondary pages are code-split so the landing page stays lean.
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -43,9 +45,11 @@ function PageFallback() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <MotionConfig reducedMotion="user">
-        <InquiryProvider>
+    <HelmetProvider>
+      <Analytics />
+      <BrowserRouter>
+        <MotionConfig reducedMotion="user">
+          <InquiryProvider>
           <ScrollManager />
           <Navbar />
           <main>
@@ -64,5 +68,6 @@ export default function App() {
         </InquiryProvider>
       </MotionConfig>
     </BrowserRouter>
+    </HelmetProvider>
   );
 }

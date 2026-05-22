@@ -5,10 +5,24 @@ import { BlogCard } from "../components/sections/BlogCard";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { cn } from "../lib/cn";
 import { posts } from "../data/blogs";
+import { SEO } from "../components/seo/SEO";
+import { SchemaMarkup } from "../components/seo/SchemaMarkup";
+import { generateBreadcrumbSchema } from "../lib/seo/schemas";
 
 export default function BlogsPage() {
   return (
     <>
+      <SEO
+        title="Marketing Blog & Insights"
+        description="Explore the latest insights, strategies, and case studies from our digital marketing experts to help scale your business."
+        canonical="https://www.xone13.com/blogs"
+      />
+      <SchemaMarkup
+        schema={generateBreadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Blogs", url: "/blogs" },
+        ])}
+      />
       <section className="pt-32 pb-12 lg:pt-40 lg:pb-16">
         <Container>
           <SectionHeading
