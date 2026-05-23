@@ -102,7 +102,7 @@ export function Button({
   );
 
   const classes = cn(
-    "group inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-[filter,background-color,border-color] duration-300 ease-[var(--ease-premium)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal",
+    "group inline-flex items-center justify-center gap-2 rounded-full font-semibold uppercase transition-[filter,background-color,border-color] duration-300 ease-[var(--ease-premium)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal",
     withArrow && "pr-2",
     variantClasses[variant],
     sizeClasses[size],

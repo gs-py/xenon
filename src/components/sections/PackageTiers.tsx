@@ -142,7 +142,7 @@ function GlassyTierCard({
             newTab
             rippleColor="rgba(0,121,130,0.2)"
             className={cn(
-              "block w-full rounded-xl py-3 text-center text-[14px] font-semibold transition-all duration-200",
+              "block w-full rounded-xl py-3 text-center text-[14px] font-semibold uppercase tracking-wide transition-all duration-200",
               tier.featured
                 ? "bg-teal text-white hover:brightness-110"
                 : "border border-black/15 bg-black/[0.06] text-ink-strong hover:bg-black/[0.1]",

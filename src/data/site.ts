@@ -33,14 +33,14 @@ export const contact = {
  */
 export const links = {
   // TODO(client): Google Calendar scheduling link for "Schedule a call".
-  googleCalendar: "https://calendar.google.com/calendar/u/0/r",
+  googleCalendar: "https://calendar.app.google/VCw3RRdee5pzfM8m8",
   // Official Instagram profiles — region-aware (India visitors see the .in account).
   instagram: "https://www.instagram.com/xone13marketing",
   instagramIndia: "https://www.instagram.com/xone13marketing.in",
   // TODO(client): LinkedIn company page (to be created and shared).
   linkedin: "https://linkedin.com/company/xone13studios",
-  // TODO(client): YouTube showreel video — link to be shared by Navas.
-  showreel: "https://youtube.com/@xone13studios",
+  // YouTube showreel video (embedded + fallback link on the Showcase card).
+  showreel: "https://youtu.be/3vx6f8r_OPk",
   // Dedicated packages page.
   packages: "/packages",
   // TODO(client): company-profile PDF. Drop the file at
@@ -90,5 +90,4 @@ export const navLinks: NavLink[] = [
 export const footerLinks: NavLink[] = [
   { label: "Terms of services", href: "/terms" },
   { label: "Privacy policy", href: "/privacy" },
-  { label: "Cancellation & Refunds", href: "#refunds" },
 ];

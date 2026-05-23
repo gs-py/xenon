@@ -21,7 +21,14 @@ export function WorkImpact() {
             fill="white"
           />
 
-          <div className="flex flex-col md:h-[520px] md:flex-row">
+          {/* Soft spotlight glow centred over the robot, so the light reads
+              clearly like the reference even against the dark panel. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0 [background:radial-gradient(circle_at_72%_42%,rgba(255,255,255,0.22),rgba(255,255,255,0.06)_28%,transparent_58%)]"
+          />
+
+          <div className="relative flex flex-col md:h-[520px] md:flex-row">
             {/* Left — copy */}
             <div className="relative z-10 flex flex-1 flex-col items-start justify-center p-8 sm:p-12">
               <Reveal
