@@ -1,6 +1,7 @@
 import storyImg from "../../assets/about/story.jpg";
 import { Container } from "../ui/Container";
 import { Reveal } from "../ui/Reveal";
+import { useSpotlight } from "../../hooks/useSpotlight";
 
 /** Brand wordmark with the signature gradient, reused across the prose. */
 function Mark({ className = "" }: { className?: string }) {
@@ -8,6 +9,7 @@ function Mark({ className = "" }: { className?: string }) {
 }
 
 export function AboutStory() {
+  const spotlightRef = useSpotlight<HTMLDivElement>();
   return (
     <section id="story" className="py-20 lg:py-28">
       <Container>
@@ -36,7 +38,10 @@ export function AboutStory() {
           </div>
 
           <Reveal className="lg:sticky lg:top-28">
-            <div className="overflow-hidden rounded-[32px] shadow-[var(--shadow-panel)]">
+            <div
+              ref={spotlightRef}
+              className="photo-spotlight relative overflow-hidden rounded-[32px] shadow-[var(--shadow-panel)]"
+            >
               <img
                 src={storyImg}
                 alt="A copy of “This Is Marketing” by Seth Godin on a concrete surface"

@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Close } from "../icons";
 import { brand, whatsappWith } from "../../data/site";
+import { useRegion } from "../../hooks/useRegion";
 import { EASE_PREMIUM } from "../../lib/motion";
 
 /**
@@ -61,6 +62,10 @@ export function InquiryProvider({ children }: { children: ReactNode }) {
 }
 
 function InquiryDialog({ onClose }: { onClose: () => void }) {
+  // India visitors get a +91 dial code; everyone else defaults to the UAE line.
+  const { isIndia } = useRegion();
+  const dialCode = isIndia ? "+91" : "+971";
+
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -74,7 +79,7 @@ function InquiryDialog({ onClose }: { onClose: () => void }) {
       "",
       `Name: ${name}`,
       email && `Email: ${email}`,
-      phone && `Phone: +971 ${phone}`,
+      phone && `Phone: ${dialCode} ${phone}`,
       message && `Message: ${message}`,
     ].filter(Boolean);
 
@@ -160,14 +165,14 @@ function InquiryDialog({ onClose }: { onClose: () => void }) {
 
           <Field label="Phone*" htmlFor="inq-phone">
             <div className="flex h-12 items-center rounded-full border border-white/20 bg-white/[0.06] px-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-colors focus-within:border-white/45 focus-within:bg-white/[0.1]">
-              <span className="font-semibold text-white">+971</span>
+              <span className="font-semibold text-white">{dialCode}</span>
               <span className="mx-4 h-5 w-px bg-white/30" />
               <input
                 id="inq-phone"
                 name="phone"
                 type="tel"
                 required
-                placeholder="50 000 0000"
+                placeholder={isIndia ? "98765 43210" : "50 000 0000"}
                 className="h-full flex-1 bg-transparent text-white outline-none placeholder:text-white/40"
               />
             </div>

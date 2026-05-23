@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ComponentType, type ReactNode, type SVGProps } from "react";
+import { type ComponentType, type ReactNode, type SVGProps } from "react";
 import { Container } from "../ui/Container";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Button } from "../ui/Button";
@@ -6,6 +6,7 @@ import { Reveal, RevealGroup, RevealItem } from "../ui/Reveal";
 import { ArrowUpRight, Camera, Code, Film, Megaphone, Palette } from "../icons";
 import { cn } from "../../lib/cn";
 import { useRegion } from "../../hooks/useRegion";
+import { useSpotlight } from "../../hooks/useSpotlight";
 import { services, type Service } from "../../data/services";
 import { whatsappPrimaryUrl } from "../../data/site";
 
@@ -81,19 +82,7 @@ interface BentoItemProps {
 
 /** Card with a brand-teal spotlight that tracks the cursor (CSS var driven). */
 function BentoItem({ className, children }: BentoItemProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      el.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-      el.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-    };
-    el.addEventListener("mousemove", onMove);
-    return () => el.removeEventListener("mousemove", onMove);
-  }, []);
+  const ref = useSpotlight<HTMLDivElement>();
 
   return (
     <div

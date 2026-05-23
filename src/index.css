@@ -196,6 +196,32 @@
   }
 }
 
+/* Cursor-follow light that sits ON TOP of a full-bleed image (e.g. story photo) */
+.photo-spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-premium);
+  background: radial-gradient(
+    320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.28),
+    transparent 60%
+  );
+}
+
+.photo-spotlight:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-spotlight::after {
+    transition: none;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Ripple button — click-expand animation                                    */
 /* -------------------------------------------------------------------------- */

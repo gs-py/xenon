@@ -3,7 +3,7 @@ import { Container } from "../ui/Container";
 import { Brand } from "../ui/Brand";
 import { SmartLink } from "../ui/SmartLink";
 import { Instagram, Linkedin, Mail, Phone, Whatsapp } from "../icons";
-import { useRegionPhone } from "../../hooks/useRegion";
+import { useRegion, useRegionPhone } from "../../hooks/useRegion";
 import {
   brand,
   contact,
@@ -21,15 +21,22 @@ interface Social {
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
-const socials: Social[] = [
-  { label: "Instagram", href: brand.socials.instagram, Icon: Instagram },
-  { label: "LinkedIn", href: brand.socials.linkedin, Icon: Linkedin },
-  { label: "WhatsApp", href: brand.socials.whatsapp, Icon: Whatsapp },
-  { label: "Email", href: brand.socials.email, Icon: Mail },
-];
+/** Socials, with the region-specific Instagram account passed in. */
+function buildSocials(instagram: string): Social[] {
+  return [
+    { label: "Instagram", href: instagram, Icon: Instagram },
+    { label: "LinkedIn", href: brand.socials.linkedin, Icon: Linkedin },
+    { label: "WhatsApp", href: brand.socials.whatsapp, Icon: Whatsapp },
+    { label: "Email", href: brand.socials.email, Icon: Mail },
+  ];
+}
 
 export function Footer() {
   const { display: phoneDisplay, href: phoneHref } = useRegionPhone();
+  const { isIndia } = useRegion();
+  const socials = buildSocials(
+    isIndia ? brand.socials.instagramIndia : brand.socials.instagram,
+  );
   return (
     <footer className="relative z-10 border-t border-line bg-white">
       <Container className="py-16 lg:py-20">

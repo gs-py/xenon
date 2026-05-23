@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import heroBg from "../../assets/hero-bg.jpg";
 import { Container } from "../ui/Container";
 import { Button } from "../ui/Button";
-import { brand } from "../../data/site";
+import { brand, links } from "../../data/site";
 import { EASE_PREMIUM, staggerContainer, fadeUp } from "../../lib/motion";
 
 export function Hero() {
@@ -78,7 +78,7 @@ export function Hero() {
             <Button href="#contact" size="lg">
               GET IN TOUCH
             </Button>
-            <Button href="#work" variant="outline" size="lg" withArrow>
+            <Button href={links.instagram} variant="outline" size="lg" withArrow newTab>
               View our work
             </Button>
           </motion.div>

@@ -72,7 +72,7 @@ export function Navbar() {
 
             <div className="flex items-center gap-2">
               <div className="hidden sm:block">
-                <Button href={links.googleCalendar} size="md" withArrow newTab>
+                <Button href={links.googleCalendar} size="md" withArrow animatedArrow newTab>
                   Schedule a call
                 </Button>
               </div>

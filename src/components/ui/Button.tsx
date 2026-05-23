@@ -12,6 +12,8 @@ interface BaseProps {
   size?: Size;
   /** Append a circular arrow badge on the right (matches the Figma CTAs). */
   withArrow?: boolean;
+  /** Give the arrow a gentle looping diagonal lift to draw the eye. */
+  animatedArrow?: boolean;
   className?: string;
 }
 
@@ -52,6 +54,7 @@ export function Button({
   variant = "primary",
   size = "md",
   withArrow = false,
+  animatedArrow = false,
   className,
   ...rest
 }: ButtonProps) {
@@ -69,7 +72,30 @@ export function Button({
               : "bg-brand text-white",
           )}
         >
-          <ArrowUpRight className="size-[18px]" />
+          {animatedArrow ? (
+            <motion.span
+              className="grid place-items-center"
+              variants={{
+                rest: { x: 0, y: 0, opacity: 1 },
+                hover: {
+                  x: [0, 10, -10, 0],
+                  y: [0, -10, 10, 0],
+                  opacity: [1, 0, 0, 1],
+                  transition: {
+                    duration: 0.8,
+                    ease: "easeInOut",
+                    times: [0, 0.45, 0.46, 1],
+                    repeat: Infinity,
+                    repeatDelay: 0.6,
+                  },
+                },
+              }}
+            >
+              <ArrowUpRight className="size-[18px]" />
+            </motion.span>
+          ) : (
+            <ArrowUpRight className="size-[18px]" />
+          )}
         </span>
       )}
     </>
@@ -84,8 +110,15 @@ export function Button({
   );
 
   const motionProps = {
-    whileHover: { scale: 1.02 },
-    whileTap: { scale: 0.98 },
+    initial: "rest",
+    animate: "rest",
+    whileHover: "hover",
+    whileTap: "tap",
+    variants: {
+      rest: { scale: 1 },
+      hover: { scale: 1.02 },
+      tap: { scale: 0.98 },
+    },
   };
 
   if ("href" in rest && rest.href !== undefined) {
