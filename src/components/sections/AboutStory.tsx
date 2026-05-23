@@ -11,38 +11,27 @@ export function AboutStory() {
   return (
     <section id="story" className="py-20 lg:py-28">
       <Container>
-        <div className="grid items-start gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
           <div className="flex flex-col gap-6">
             <Reveal as="p" className="text-lg font-light leading-relaxed text-pretty text-ink/85">
               <Mark className="text-2xl font-bold" /> is a creative marketing and
-              production partner built for brands that require more than
-              fragmented execution. We integrate into businesses as a structured
-              creative and marketing execution team, bringing clarity,
-              consistency, and direction to how brands grow and communicate.
+              production partner helping brands build a strong and consistent
+              presence through strategic content, branding, and digital
+              execution.
             </Reveal>
 
             <Reveal as="p" delay={0.06} className="font-light leading-relaxed text-pretty text-ink/80">
-              Founded in 2023, <Mark /> began with photography, videography, and
-              social media content creation. By 2025, it evolved into a
-              full-scale execution system covering branding, advertising, content
-              production, social media management, design, web presence, and
-              digital marketing solutions.
+              Founded in 2023 with a focus on photography, videography, and social
+              media content, <Mark /> has grown into a full-service creative and
+              marketing execution team offering branding, advertising, web
+              presence, social media management, and digital marketing solutions.
             </Reveal>
 
             <Reveal as="p" delay={0.1} className="font-light leading-relaxed text-pretty text-ink/80">
-              Operating across India and the United Arab Emirates, we work with
-              brands from multiple industries including interiors, luxury, retail,
-              hospitality, cafes, real estate, and lifestyle businesses. Our
-              approach is built on long-term partnerships, structured
-              communication, and execution that remains consistent over time.
-            </Reveal>
-
-            <Reveal as="p" delay={0.14} className="font-light leading-relaxed text-pretty text-ink/80">
-              We believe strong brands are built through clarity, consistency,
-              and creative execution. At xone13, we work as a reliable
-              creative and marketing partner, ensuring photography, videography,
-              branding, and digital presence are managed with precision,
-              stability, and purpose.
+              Operating across India and the UAE, we work with brands in
+              interiors, luxury, hospitality, retail, real estate, cafes, and
+              lifestyle sectors — delivering creative solutions with clarity,
+              consistency, and long-term vision.
             </Reveal>
           </div>
 

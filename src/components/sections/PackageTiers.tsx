@@ -183,7 +183,7 @@ export function PackageTiers() {
         />
 
         {/* Glassy cards */}
-        <div className="mt-14 flex flex-col items-center justify-center gap-8 md:flex-row md:gap-6">
+        <div className="mt-14 flex flex-col items-stretch justify-center gap-8 md:flex-row md:gap-6">
           {category.tiers.map((tier) => (
             <GlassyTierCard
               key={tier.name}
@@ -192,6 +192,18 @@ export function PackageTiers() {
             />
           ))}
         </div>
+
+        {/* Category fine-print */}
+        {category.notes && category.notes.length > 0 && (
+          <ul className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] font-light text-ink/50">
+            {category.notes.map((note) => (
+              <li key={note} className="flex items-center gap-1.5">
+                <span aria-hidden className="text-teal/70">•</span>
+                {note}
+              </li>
+            ))}
+          </ul>
+        )}
       </Container>
     </section>
   );

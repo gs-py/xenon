@@ -31,7 +31,7 @@ const socials: Social[] = [
 export function Footer() {
   const { display: phoneDisplay, href: phoneHref } = useRegionPhone();
   return (
-    <footer className="border-t border-line bg-white">
+    <footer className="relative z-10 border-t border-line bg-white">
       <Container className="py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
           {/* Brand + socials */}
