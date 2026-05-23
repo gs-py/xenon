@@ -8,6 +8,10 @@ export function ShaderCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Phones don't render the ring background — skip WebGL/RAF entirely (the
+    // canvas is also CSS-hidden below `md`), leaving the white page beneath.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const gl = canvas.getContext("webgl");
@@ -98,7 +102,7 @@ export function ShaderCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 block h-full w-full bg-white"
+      className="fixed inset-0 z-0 hidden h-full w-full bg-white md:block"
     />
   );
 }

@@ -1,6 +1,5 @@
 
 import { ShaderCanvas } from "../components/ui/ShaderCanvas";
-import { PackagesHero } from "../components/sections/PackagesHero";
 import { PackageTiers } from "../components/sections/PackageTiers";
 import { FinalCTA } from "../components/sections/FinalCTA";
 import { SEO } from "../components/seo/SEO";
@@ -26,7 +25,6 @@ export default function PackagesPage() {
 
       {/* Page content sits above the shader */}
       <div className="relative z-10">
-        <PackagesHero />
         <PackageTiers />
         <FinalCTA variant="light" />
       </div>

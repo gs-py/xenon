@@ -172,7 +172,7 @@ export function PackageTiers() {
     <section
       id="packages"
       aria-label="Service packages"
-      className="relative scroll-mt-24 pb-20 lg:pb-28"
+      className="relative scroll-mt-24 pt-36 pb-20 lg:pt-40 lg:pb-28"
     >
       <Container className="relative z-10">
         {/* Category tab switcher */}
