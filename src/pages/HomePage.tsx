@@ -19,7 +19,7 @@ export default function HomePage() {
     <>
       <SEO
         title="Digital Marketing Agency | Drive Growth"
-        description="Xenon is a premier digital marketing agency driving growth through SEO, PPC, and cutting-edge web design. Transform your online presence today."
+        description="XONE13 is a premier digital marketing agency driving growth through SEO, PPC, and cutting-edge web design. Transform your online presence today."
         canonical="https://www.xone13.com/"
         keywords={["digital marketing", "seo", "ppc", "web design", "agency"]}
       />

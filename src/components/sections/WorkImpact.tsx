@@ -49,7 +49,7 @@ export function WorkImpact() {
                 markets.
               </Reveal>
               <Reveal delay={0.16} className="mt-9">
-                <Button href="#contact" size="lg" withArrow>
+                <Button href="https://wa.me/971521589011?text=I'm%20interested%20in%20your%20marketing%20and%20production%20services.%20Please%20share%20more%20details." size="lg" withArrow>
                   Get in touch
                 </Button>
               </Reveal>

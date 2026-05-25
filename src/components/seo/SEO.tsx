@@ -18,10 +18,10 @@ export function SEO({
   type = "website",
   image = "/og-image.jpg",
   keywords = [],
-  author = "Xenon Agency",
+  author = "XONE13 Marketing Agency",
   noindex = false,
 }: SEOProps) {
-  const siteName = "Xenon Marketing Agency";
+  const siteName = "XONE13 Marketing Agency";
   const fullTitle = `${title} | ${siteName}`;
 
   return (

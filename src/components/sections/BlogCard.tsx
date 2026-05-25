@@ -51,9 +51,9 @@ export function BlogCard({ post, flip = false }: BlogCardProps) {
           {post.excerpt}
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-4">
-          <Button href={`#${post.id}`} withArrow>
+          {/* <Button href={`#${post.id}`} withArrow>
             Read More
-          </Button>
+          </Button> */}
           <span className="inline-flex items-center rounded-full border border-teal/50 px-4 py-2 text-sm font-medium text-teal">
             {post.date}
           </span>

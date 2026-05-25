@@ -3,7 +3,7 @@ import { SectionHeading } from "../components/ui/SectionHeading";
 import { Reveal } from "../components/ui/Reveal";
 import { BlogCard } from "../components/sections/BlogCard";
 import { FinalCTA } from "../components/sections/FinalCTA";
-import { cn } from "../lib/cn";
+// import { cn } from "../lib/cn";
 import { posts } from "../data/blogs";
 import { SEO } from "../components/seo/SEO";
 import { SchemaMarkup } from "../components/seo/SchemaMarkup";
@@ -43,9 +43,9 @@ export default function BlogsPage() {
             ))}
           </div>
 
-          <Reveal>
+          {/* <Reveal>
             <Pagination />
-          </Reveal>
+          </Reveal> */}
         </Container>
       </section>
 
@@ -54,38 +54,38 @@ export default function BlogsPage() {
   );
 }
 
-function Pagination() {
-  const pillBase =
-    "bg-brand text-white rounded-full px-5 py-2.5 text-sm font-semibold shadow-[var(--shadow-button)] transition-transform duration-300 ease-[var(--ease-premium)] hover:-translate-y-0.5";
-  return (
-    <nav
-      aria-label="Blog pagination"
-      className="mt-16 flex items-center justify-center gap-3 lg:mt-24"
-    >
-      <button type="button" className={pillBase}>
-        First
-      </button>
-      <div className="flex items-center gap-2">
-        {[1, 2].map((page) => (
-          <button
-            key={page}
-            type="button"
-            aria-label={`Page ${page}`}
-            aria-current={page === 1 ? "page" : undefined}
-            className={cn(
-              "grid size-9 place-items-center rounded-full text-sm font-semibold transition-colors",
-              page === 1
-                ? "bg-brand text-white"
-                : "border border-teal/40 text-teal hover:bg-teal-soft/50",
-            )}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
-      <button type="button" className={pillBase}>
-        Last
-      </button>
-    </nav>
-  );
-}
+// function Pagination() {
+//   const pillBase =
+//     "bg-brand text-white rounded-full px-5 py-2.5 text-sm font-semibold shadow-[var(--shadow-button)] transition-transform duration-300 ease-[var(--ease-premium)] hover:-translate-y-0.5";
+//   return (
+//     <nav
+//       aria-label="Blog pagination"
+//       className="mt-16 flex items-center justify-center gap-3 lg:mt-24"
+//     >
+//       <button type="button" className={pillBase}>
+//         First
+//       </button>
+//       <div className="flex items-center gap-2">
+//         {[1, 2].map((page) => (
+//           <button
+//             key={page}
+//             type="button"
+//             aria-label={`Page ${page}`}
+//             aria-current={page === 1 ? "page" : undefined}
+//             className={cn(
+//               "grid size-9 place-items-center rounded-full text-sm font-semibold transition-colors",
+//               page === 1
+//                 ? "bg-brand text-white"
+//                 : "border border-teal/40 text-teal hover:bg-teal-soft/50",
+//             )}
+//           >
+//             {page}
+//           </button>
+//         ))}
+//       </div>
+//       <button type="button" className={pillBase}>
+//         Last
+//       </button>
+//     </nav>
+//   );
+// }

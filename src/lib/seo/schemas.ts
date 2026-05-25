@@ -11,7 +11,7 @@ import type {
 
 const BASE_URL = "https://www.xone13.com";
 const LOGO_URL = `${BASE_URL}/logo.png`;
-const ORGANIZATION_NAME = "Xenon Marketing Agency";
+const ORGANIZATION_NAME = "XONE13 Marketing Agency";
 
 export function generateOrganizationSchema(): WithContext<Organization> {
   return {
