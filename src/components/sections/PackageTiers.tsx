@@ -100,7 +100,7 @@ function GlassyTierCard({
       <div
         className={cn(
           "flex h-full flex-col rounded-2xl px-7 py-8 shadow-xl transition-all duration-300",
-          "backdrop-blur-md bg-white/30 border border-black/10",
+          "backdrop-blur-2xl bg-white/50 border border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)]",
           tier.featured &&
           "ring-2 ring-teal/30 shadow-2xl",
         )}
@@ -114,10 +114,10 @@ function GlassyTierCard({
 
         {/* Plan name — large, extralight */}
         <div className="mb-3">
-          <h3 className="text-[42px] font-extralight tracking-[-0.03em] text-ink-strong leading-tight">
+          <h3 className="text-[42px] font-light tracking-[-0.03em] text-ink-strong leading-tight">
             {tier.name}
           </h3>
-          <p className="mt-1 text-[15px] font-light text-ink/60">
+          <p className="mt-1 text-[15px] font-normal text-ink/80">
             {tier.tagline}
           </p>
         </div>
@@ -126,11 +126,11 @@ function GlassyTierCard({
         <div className="my-5 h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent" />
 
         {/* Feature list */}
-        <ul className="mb-6 flex flex-col gap-2.5 text-[14px] text-ink/80">
+        <ul className="mb-6 flex flex-col gap-2.5 text-[14px] text-ink">
           {tier.features.map((feature) => (
             <li key={feature} className="flex items-center gap-2.5">
               <Check size={14} className="shrink-0 text-teal" strokeWidth={3} />
-              <span className="font-light">{feature}</span>
+              <span className="font-normal">{feature}</span>
             </li>
           ))}
         </ul>
@@ -195,7 +195,7 @@ export function PackageTiers() {
 
         {/* Category fine-print */}
         {category.notes && category.notes.length > 0 && (
-          <ul className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] font-light text-ink/50">
+          <ul className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] font-normal text-ink/70">
             {category.notes.map((note) => (
               <li key={note} className="flex items-center gap-1.5">
                 <span aria-hidden className="text-teal/70">•</span>
