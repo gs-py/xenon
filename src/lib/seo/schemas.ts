@@ -8,10 +8,11 @@ import type {
   Article,
   WithContext,
 } from "schema-dts";
+import { brand, contact, links } from "../../data/site";
 
 const BASE_URL = "https://www.xone13.com";
 const LOGO_URL = `${BASE_URL}/logo.png`;
-const ORGANIZATION_NAME = "XONE13 Marketing Agency";
+const ORGANIZATION_NAME = brand.name;
 
 export function generateOrganizationSchema(): WithContext<Organization> {
   return {
@@ -20,11 +21,9 @@ export function generateOrganizationSchema(): WithContext<Organization> {
     name: ORGANIZATION_NAME,
     url: BASE_URL,
     logo: LOGO_URL,
-    sameAs: [
-      "https://www.linkedin.com/company/xenon-agency",
-      "https://twitter.com/xenonagency",
-      "https://www.instagram.com/xenonagency",
-    ],
+    email: contact.email,
+    telephone: contact.phone,
+    sameAs: [links.instagram, links.linkedin],
   };
 }
 
@@ -36,19 +35,12 @@ export function generateLocalBusinessSchema(): WithContext<LocalBusiness> {
     image: LOGO_URL,
     "@id": BASE_URL,
     url: BASE_URL,
-    telephone: "+1-800-555-0199",
+    telephone: contact.phone,
+    email: contact.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "123 Innovation Drive",
-      addressLocality: "San Francisco",
-      addressRegion: "CA",
-      postalCode: "94105",
-      addressCountry: "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 37.7749,
-      longitude: -122.4194,
+      addressLocality: "Dubai",
+      addressCountry: "AE",
     },
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
