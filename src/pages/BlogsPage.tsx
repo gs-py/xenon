@@ -15,7 +15,7 @@ export default function BlogsPage() {
       <SEO
         title="Marketing Blog & Insights"
         description="Explore the latest insights, strategies, and case studies from our digital marketing experts to help scale your business."
-        canonical="https://www.xone13.com/blogs"
+        canonical="https://xone13.com/blogs"
       />
       <SchemaMarkup
         schema={generateBreadcrumbSchema([

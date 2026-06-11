@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const BASE_URL = "https://www.xone13.com";
+const BASE_URL = "https://xone13.com";
 const OUT_DIR = path.resolve(process.cwd(), "dist");
 
 // Assuming blogs are static for now, you could also fetch this if it were dynamic

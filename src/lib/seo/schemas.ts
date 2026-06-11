@@ -10,7 +10,7 @@ import type {
 } from "schema-dts";
 import { brand, contact, links } from "../../data/site";
 
-const BASE_URL = "https://www.xone13.com";
+const BASE_URL = "https://xone13.com";
 const LOGO_URL = `${BASE_URL}/logo.png`;
 const ORGANIZATION_NAME = brand.name;
 

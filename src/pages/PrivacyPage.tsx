@@ -137,7 +137,7 @@ export default function PrivacyPage() {
       <SEO
         title="Privacy Policy"
         description="How XONE13 STUDIOS collects, uses, retains, and protects your information across India and the UAE — and the rights you have over your data."
-        canonical="https://www.xone13.com/privacy"
+        canonical="https://xone13.com/privacy"
       />
       <SchemaMarkup
         schema={generateBreadcrumbSchema([

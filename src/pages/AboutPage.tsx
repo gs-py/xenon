@@ -12,7 +12,7 @@ export default function AboutPage() {
       <SEO
         title="About Us | Our Story & Vision"
         description="Learn about XONE13's mission to transform digital experiences. Meet our team of experts dedicated to driving unprecedented growth for our clients."
-        canonical="https://www.xone13.com/about"
+        canonical="https://xone13.com/about"
       />
       <SchemaMarkup
         schema={generateBreadcrumbSchema([

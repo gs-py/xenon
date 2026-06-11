@@ -32,7 +32,7 @@ export default function PackagesPage() {
       <SEO
         title="Marketing Packages & Pricing"
         description="Transparent, results-driven marketing packages tailored for your growth. Find the right mix of SEO, PPC, and development services."
-        canonical="https://www.xone13.com/packages"
+        canonical="https://xone13.com/packages"
       />
       <SchemaMarkup
         schema={generateBreadcrumbSchema([

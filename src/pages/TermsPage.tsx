@@ -85,7 +85,7 @@ export default function TermsPage() {
       <SEO
         title="Terms of Service"
         description="The terms governing engagements with XONE13 STUDIOS — scope, payment, revisions, intellectual property, liability, and governing law across India and the UAE."
-        canonical="https://www.xone13.com/terms"
+        canonical="https://xone13.com/terms"
       />
       <SchemaMarkup
         schema={generateBreadcrumbSchema([
