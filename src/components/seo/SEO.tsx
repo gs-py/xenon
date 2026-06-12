@@ -16,7 +16,7 @@ export function SEO({
   description,
   canonical,
   type = "website",
-  image = "/og-image.jpg",
+  image = "https://xone13.com/logo.png",
   keywords = [],
   author = "XONE13 Marketing Agency",
   noindex = false,

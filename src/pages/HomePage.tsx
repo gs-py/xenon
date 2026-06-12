@@ -18,8 +18,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Digital Marketing Agency | Drive Growth"
-        description="XONE13 is a premier digital marketing agency driving growth through SEO, PPC, and cutting-edge web design. Transform your online presence today."
+        title="Top Marketing Agencies in Dubai"
+        description="Xone13 Marketing is one of the top marketing agencies in Dubai, combining strategy, brand, video production, social, performance marketing, and SEO."
         canonical="https://xone13.com/"
         keywords={["digital marketing", "seo", "ppc", "web design", "agency"]}
       />
