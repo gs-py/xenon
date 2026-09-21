@@ -82,6 +82,7 @@ export const brand = {
 
 export const navLinks: NavLink[] = [
   { label: "Services", href: "/#services" },
+  { label: "Our work", href: "/work" },
   { label: "Packages", href: "/packages" },
   { label: "Blogs", href: "/blogs" },
   { label: "About", href: "/about" },

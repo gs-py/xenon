@@ -9,6 +9,7 @@ const routes = [
   { url: "/", changefreq: "weekly", priority: 1.0 },
   { url: "/about", changefreq: "monthly", priority: 0.8 },
   { url: "/services", changefreq: "weekly", priority: 0.9 }, // assuming services page might exist
+  { url: "/work", changefreq: "monthly", priority: 0.9 },
   { url: "/packages", changefreq: "monthly", priority: 0.9 },
   { url: "/blogs", changefreq: "daily", priority: 0.8 },
 ];
