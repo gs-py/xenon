@@ -8,8 +8,7 @@ interface Project {
   category: string;
   url: string;
   domain: string;
-  monogram: string;
-  previewClass: string;
+  previewImage: string;
 }
 
 const projects: Project[] = [
@@ -18,56 +17,49 @@ const projects: Project[] = [
     category: "Cleaning services",
     url: "https://www.tidy-point.co.uk/",
     domain: "tidy-point.co.uk",
-    monogram: "TP",
-    previewClass: "bg-[#eaf3f6] text-[#164c68]",
+    previewImage: "/work-previews/tidy-point.png",
   },
   {
     name: "Sky Handlers Logistics",
     category: "Logistics & transport",
     url: "https://www.skyhandlerslogistics.com/",
     domain: "skyhandlerslogistics.com",
-    monogram: "SH",
-    previewClass: "bg-[#e8edf1] text-[#193344]",
+    previewImage: "/work-previews/sky-handlers.png",
   },
   {
     name: "Pools & Landscaping",
     category: "Outdoor living",
     url: "https://pools-landscaping.ae/",
     domain: "pools-landscaping.ae",
-    monogram: "P&L",
-    previewClass: "bg-[#e6f2ef] text-[#0f6869]",
+    previewImage: "/work-previews/pools-landscaping.png",
   },
   {
     name: "Impress Build",
     category: "Construction & interiors",
     url: "https://impressbuild.ae/",
     domain: "impressbuild.ae",
-    monogram: "IB",
-    previewClass: "bg-[#eeeae5] text-[#624d3f]",
+    previewImage: "/work-previews/impress-build.png",
   },
   {
     name: "Interior World",
     category: "Interior design",
     url: "https://interiorworld.in/",
     domain: "interiorworld.in",
-    monogram: "IW",
-    previewClass: "bg-[#f0ebe5] text-[#5f4e42]",
+    previewImage: "/work-previews/interior-world.png",
   },
   {
     name: "Hawks Hotels",
     category: "Hospitality",
     url: "https://www.hawkshotels.com/",
     domain: "hawkshotels.com",
-    monogram: "HH",
-    previewClass: "bg-[#e9edf6] text-[#273c68]",
+    previewImage: "/work-previews/hawks-hotels.png",
   },
   {
     name: "IO Studio",
     category: "Creative studio",
     url: "https://iostudio.work/",
     domain: "iostudio.work",
-    monogram: "IO",
-    previewClass: "bg-[#eeeaf4] text-[#564276]",
+    previewImage: "/work-previews/io-studio.png",
   },
 ];
 
@@ -97,28 +89,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </a>
         </div>
 
-        <div className={"relative aspect-[16/10] overflow-hidden " + project.previewClass}>
-          <div aria-hidden className="absolute -right-10 -top-10 size-48 rounded-full border-[28px] border-current/10" />
-          <div aria-hidden className="absolute bottom-[-35%] left-[-5%] h-[75%] w-[70%] rounded-[42%] border border-current/15" />
-          <div className="absolute inset-x-6 top-6 flex items-center justify-between border-b border-current/15 pb-4">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] opacity-70">
-              Live experience
-            </span>
-            <span className="size-2 rounded-full bg-current opacity-70" />
-          </div>
-          <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-5xl font-semibold tracking-[-0.08em] sm:text-6xl">
-                {project.monogram}
-              </p>
-              <p className="mt-2 max-w-[15rem] text-xs font-medium uppercase tracking-[0.14em] opacity-70">
-                {project.category}
-              </p>
-            </div>
-            <span className="grid size-12 shrink-0 place-items-center rounded-full border border-current/20 bg-white/35 text-sm backdrop-blur-sm">
-              <ArrowUpRight className="size-5" />
-            </span>
-          </div>
+        <div className="relative aspect-[16/10] overflow-hidden bg-ink-strong">
+          <img
+            src={project.previewImage}
+            alt={"Homepage screenshot of " + project.name}
+            loading="lazy"
+            className="absolute inset-0 size-full object-cover object-top transition-transform duration-700 ease-[var(--ease-premium)] group-hover:scale-[1.02]"
+          />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-strong/25 to-transparent" />
           <a
             href={project.url}
             target="_blank"
